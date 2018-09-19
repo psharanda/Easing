@@ -10,15 +10,30 @@ import QuartzCore
 extension Easing {
     
     public static let caEaseIn: Easing = {
-        return Easing.cubicBezierEasingForMediaFunction(CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn))
+        #if swift(>=4.2)
+        let f = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeIn)
+        #else
+        let f = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
+        #endif        
+        return Easing.cubicBezierEasingForMediaFunction(f)
     }()
     
     public static let caEaseOut: Easing = {
-        return Easing.cubicBezierEasingForMediaFunction(CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut))
+        #if swift(>=4.2)
+        let f = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        #else
+        let f = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        #endif
+        return Easing.cubicBezierEasingForMediaFunction(f)
     }()
     
     public static let caEaseInEaseOut: Easing = {
-        return Easing.cubicBezierEasingForMediaFunction(CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut))
+        #if swift(>=4.2)
+        let f = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        #else
+        let f = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        #endif
+        return Easing.cubicBezierEasingForMediaFunction(f)
     }()
     
     private static func cubicBezierEasingForMediaFunction(_ m: CAMediaTimingFunction) -> Easing {
