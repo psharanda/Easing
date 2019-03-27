@@ -173,16 +173,10 @@ struct CubicBezierCalculator {
     
 }
 
-private struct SampleKey: Hashable {
+private struct SampleKey: Equatable, Hashable {
     let x1: Double
     let x2: Double
     let number: Int
     
-    var hashValue: Int {
-        return (31 &* x1.hashValue) &+ x2.hashValue
-    }
 }
 
-private func ==(left: SampleKey, right: SampleKey) -> Bool {
-    return (left.x1 == right.x1) && (left.x2 == right.x2) && (left.number == right.number)
-}
