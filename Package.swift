@@ -1,18 +1,16 @@
-// swift-tools-version:5.1
-// The swift-tools-version declares the minimum version of Swift required to build this package.
+// swift-tools-version:5.9
 
 import PackageDescription
 
-let package = Package(name: "Easing",
-                      platforms: [.macOS(.v10_10),
-                                  .iOS(.v8),
-                                  .tvOS(.v9),
-                                  .watchOS(.v2)],
-                      products: [.library(name: "Easing",
-                                          targets: ["Easing"])],
-                      targets: [.target(name: "Easing",
-                                        path: "Sources"),
-                                .testTarget(
-                                    name: "EasingTests",
-                                    dependencies: ["Easing"]),],
-                      swiftLanguageVersions: [.v5])
+let packageName = "Easing"
+
+let package = Package(
+    name: "Easing",
+    platforms: [.iOS(.v12), .macOS(.v10_13), .watchOS(.v4), .tvOS(.v12), .visionOS(.v1)],
+    products: [.library(name: "Easing", targets: ["Easing"])],
+    dependencies: [],
+    targets: [
+        .target(name: "Easing", dependencies: [], path: "Sources"),
+        .testTarget(name: "EasingTests", dependencies: ["Easing"], path: "Tests"),
+    ]
+)
