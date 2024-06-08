@@ -1,0 +1,15 @@
+{
+  "originHash" : "ad7dc1f5a240c196a5a5d3cf233bb3345d3d308c7bea28c390a53456f5347fec",
+  "pins" : [
+    {
+      "identity" : "fixflex",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/psharanda/FixFlex",
+      "state" : {
+        "revision" : "83a7d0f58fa5b98e86712d26c179122ae10c1445",
+        "version" : "1.2.1"
+      }
+    }
+  ],
+  "version" : 3
+}
