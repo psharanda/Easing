@@ -22,16 +22,25 @@ class EasingChartView: AdaptiveHeightView {
 
     private func commonInit() {
         xAxisLayer.fillColor = nil
-        xAxisLayer.strokeColor = UIColor.black.withAlphaComponent(0.1).cgColor
         layer.addSublayer(xAxisLayer)
 
         yAxisLayer.fillColor = nil
-        yAxisLayer.strokeColor = UIColor.black.withAlphaComponent(0.1).cgColor
         layer.addSublayer(yAxisLayer)
 
         easingLayer.fillColor = nil
-        easingLayer.strokeColor = UIColor.black.withAlphaComponent(0.75).cgColor
         layer.addSublayer(easingLayer)
+        updateColors()
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        updateColors()
+    }
+
+    private func updateColors() {
+        xAxisLayer.strokeColor = UIColor.label.withAlphaComponent(0.2).cgColor
+        yAxisLayer.strokeColor = UIColor.label.withAlphaComponent(0.2).cgColor
+        easingLayer.strokeColor = UIColor.label.cgColor
     }
 
     var easing: Easing? {
@@ -78,6 +87,10 @@ class EasingChartView: AdaptiveHeightView {
         yAxisLayer.frame = CGRect(x: 0, y: -pathBounds.minY, width: 0, height: 0)
         easingLayer.frame = CGRect(x: 0, y: -pathBounds.minY, width: 0, height: 0)
 
+        self.pathBounds = pathBounds
+
         return easingPath.bounds.size.height
     }
+
+    var pathBounds: CGRect?
 }

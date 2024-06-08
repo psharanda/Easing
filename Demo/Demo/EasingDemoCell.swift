@@ -28,10 +28,10 @@ class EasingDemoCell: UITableViewCell {
         contentView.addSubview(demoView)
         contentView.addSubview(titleLabel)
 
-        contentView.fx.hstack(Fill(), Flex(titleLabel), Fill())
+        contentView.fx.hstack(Fix(20), Flex(titleLabel), Flex(), Fix(demoView, 60), Fix(20))
 
-        contentView.fx.hstack(Fill(), Fix(demoView, 60), Fill())
-        contentView.fx.vstack(Fix(10), Flex(titleLabel), Fix(10), Flex(demoView), Fix(10))
+        contentView.fx.vstack(Fill(), Flex(titleLabel), Fill())
+        contentView.fx.vstack(Fix(10), Flex(demoView), Fix(10))
     }
 
     var demoItem: EasingDemoItem? {
