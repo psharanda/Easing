@@ -1,4 +1,7 @@
-# Easing
+<p align="center">
+<img src="Readme/logo.png" width="50%" alt="Easing Logo" />
+</p>
+
 
 ## Reference
 
