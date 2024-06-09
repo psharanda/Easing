@@ -58,4 +58,8 @@ open class AdaptiveContentView: UIView {
     open func contentRect(forBounds bounds: CGRect) -> CGRect {
         return bounds
     }
+    
+    open override func sizeThatFits(_ size: CGSize) -> CGSize {
+        return workerLabel.sizeThatFits(size)
+    }
 }

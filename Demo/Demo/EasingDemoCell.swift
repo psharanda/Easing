@@ -5,11 +5,6 @@
 import FixFlex
 import UIKit
 
-struct EasingDemoItem {
-    let name: String
-    let easing: Easing
-}
-
 class EasingDemoCell: UITableViewCell {
     private let demoView = EasingChartView()
     private let titleLabel = UILabel()

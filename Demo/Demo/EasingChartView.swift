@@ -54,16 +54,16 @@ class EasingChartView: AdaptiveContentView {
             return bounds
         }
         
-        let width = bounds.width
+        let chartWidth = bounds.width - 2
         
         let xAxisPath = UIBezierPath()
-        xAxisPath.move(to: CGPoint(x: 0, y: width))
-        xAxisPath.addLine(to: CGPoint(x: width, y: width))
+        xAxisPath.move(to: CGPoint(x: 0, y: chartWidth))
+        xAxisPath.addLine(to: CGPoint(x: chartWidth, y: chartWidth))
         xAxisLayer.path = xAxisPath.cgPath
 
         let yAxisPath = UIBezierPath()
         yAxisPath.move(to: .zero)
-        yAxisPath.addLine(to: CGPoint(x: 0, y: width))
+        yAxisPath.addLine(to: CGPoint(x: 0, y: chartWidth))
         yAxisLayer.path = yAxisPath.cgPath
 
         guard let easing else {
@@ -74,12 +74,12 @@ class EasingChartView: AdaptiveContentView {
         }
 
         let easingPath = UIBezierPath()
-        easingPath.move(to: CGPoint(x: 0, y: width))
+        easingPath.move(to: CGPoint(x: 0, y: chartWidth))
 
         var x = 0.0
-        while x <= width {
-            let progress = x / width
-            let y = width - easing.calculate(progress) * width
+        while x <= chartWidth {
+            let progress = x / chartWidth
+            let y = chartWidth - easing.calculate(progress) * chartWidth
 
             easingPath.addLine(to: CGPoint(x: x, y: y))
             x += 1
@@ -89,13 +89,13 @@ class EasingChartView: AdaptiveContentView {
 
         let pathBounds = easingPath.bounds
 
-        xAxisLayer.frame = CGRect(x: 0, y: -pathBounds.minY, width: 0, height: 0)
-        yAxisLayer.frame = CGRect(x: 0, y: -pathBounds.minY, width: 0, height: 0)
-        easingLayer.frame = CGRect(x: 0, y: -pathBounds.minY, width: 0, height: 0)
+        xAxisLayer.frame = CGRect(x: 1, y: -pathBounds.minY + 1, width: 0, height: 0)
+        yAxisLayer.frame = CGRect(x: 1, y: -pathBounds.minY + 1, width: 0, height: 0)
+        easingLayer.frame = CGRect(x: 1, y: -pathBounds.minY + 1, width: 0, height: 0)
 
         self.pathBounds = pathBounds
 
-        return CGRect(x: 0, y: 0, width: width, height: pathBounds.height)
+        return CGRect(x: 0, y: 0, width: bounds.width, height: pathBounds.height + 2)
     }
 
     var pathBounds: CGRect?

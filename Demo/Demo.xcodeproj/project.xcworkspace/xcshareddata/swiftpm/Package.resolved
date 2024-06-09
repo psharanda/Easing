@@ -1,5 +1,5 @@
 {
-  "originHash" : "ad7dc1f5a240c196a5a5d3cf233bb3345d3d308c7bea28c390a53456f5347fec",
+  "originHash" : "ed3e487f7ed5771e7714735368878af1d0daa01bc8d176d1560f16d899872633",
   "pins" : [
     {
       "identity" : "fixflex",
@@ -8,6 +8,15 @@
       "state" : {
         "revision" : "83a7d0f58fa5b98e86712d26c179122ae10c1445",
         "version" : "1.2.1"
+      }
+    },
+    {
+      "identity" : "ios-snapshot-test-case",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/uber/ios-snapshot-test-case",
+      "state" : {
+        "revision" : "7b10770333a961be6e5a41c9ce04b8c6d3990126",
+        "version" : "8.0.0"
       }
     }
   ],
