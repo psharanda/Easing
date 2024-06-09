@@ -13,7 +13,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
 
         let nc = UINavigationController()
-        let vc = EasingDemoViewController()
+        let vc = EasingListViewController()
         nc.viewControllers = [vc]
         window.rootViewController = nc
 

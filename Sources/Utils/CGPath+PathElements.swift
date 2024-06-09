@@ -63,7 +63,7 @@ extension CGPath {
             case .closeSubpath:
                 result.append(.closeSubpath)
             @unknown default:
-                fatalError()
+                break
             }
         }
 

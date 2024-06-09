@@ -4,33 +4,23 @@
 
 import UIKit
 
-open class AdaptiveHeightView: UIView {
+open class AdaptiveContentView: UIView {
     private class WorkerLabel: UILabel {
-        var layoutSubviewsForWidth: ((CGFloat) -> CGFloat)?
+        var contentRectForBounds: ((CGRect) -> CGRect)?
 
         override init(frame: CGRect) {
             super.init(frame: frame)
-            commonInit()
-        }
-
-        required init?(coder: NSCoder) {
-            super.init(coder: coder)
-            commonInit()
-        }
-
-        private func commonInit() {
             numberOfLines = 0
+            isHidden = true
         }
 
-        override func draw(_: CGRect) {}
+        @available(*, unavailable)
+        required init?(coder _: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
 
         override func textRect(forBounds bounds: CGRect, limitedToNumberOfLines _: Int) -> CGRect {
-            let size = bounds.size
-            if size.width > 10000 {
-                return bounds
-            }
-            let resultSize = layoutSubviewsForWidth?(size.width) ?? 0
-            return CGRect(origin: .zero, size: CGSize(width: size.width, height: resultSize))
+            return contentRectForBounds?(bounds) ?? .zero
         }
     }
 
@@ -48,8 +38,8 @@ open class AdaptiveHeightView: UIView {
 
     private func commonInit() {
         workerLabel.translatesAutoresizingMaskIntoConstraints = false
-        workerLabel.layoutSubviewsForWidth = { [weak self] width in
-            self?.layoutSubviews(forWidth: width) ?? 0
+        workerLabel.contentRectForBounds = { [weak self] bounds in
+            self?.contentRect(forBounds: bounds) ?? .zero
         }
         addSubview(workerLabel)
 
@@ -61,11 +51,11 @@ open class AdaptiveHeightView: UIView {
         ])
     }
 
-    open func setNeedsLayoutSubviewsForWidth() {
-        workerLabel.text = "\(arc4random())"
+    open func invalidateContentRect() {
+        workerLabel.text = workerLabel.text == "a" ? "b" : "a"
     }
 
-    open func layoutSubviews(forWidth _: CGFloat) -> CGFloat {
-        return 0
+    open func contentRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds
     }
 }

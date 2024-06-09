@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		1B2723ED2C1473DC00EE2AFB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2723EC2C1473DC00EE2AFB /* AppDelegate.swift */; };
 		1B2723EF2C1473DC00EE2AFB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2723EE2C1473DC00EE2AFB /* SceneDelegate.swift */; };
-		1B2723F12C1473DC00EE2AFB /* EasingDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2723F02C1473DC00EE2AFB /* EasingDemoViewController.swift */; };
+		1B2723F12C1473DC00EE2AFB /* EasingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2723F02C1473DC00EE2AFB /* EasingListViewController.swift */; };
 		1B2723F62C1473DE00EE2AFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B2723F52C1473DE00EE2AFB /* Assets.xcassets */; };
 		1B2723F92C1473DE00EE2AFB /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 1B2723F82C1473DE00EE2AFB /* Base */; };
 		1B27240C2C14740C00EE2AFB /* Easing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2724002C14740C00EE2AFB /* Easing.swift */; };
@@ -21,16 +21,17 @@
 		1B2724122C14740C00EE2AFB /* CGPath+PathElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2724082C14740C00EE2AFB /* CGPath+PathElements.swift */; };
 		1B2724132C14740C00EE2AFB /* CubicBezierInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2724092C14740C00EE2AFB /* CubicBezierInterpolator.swift */; };
 		1B2724162C14816200EE2AFB /* FixFlex in Frameworks */ = {isa = PBXBuildFile; productRef = 1B2724152C14816200EE2AFB /* FixFlex */; };
-		1B2724182C14D20200EE2AFB /* AdaptiveHeightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2724172C14D20200EE2AFB /* AdaptiveHeightView.swift */; };
+		1B2724182C14D20200EE2AFB /* AdaptiveContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2724172C14D20200EE2AFB /* AdaptiveContentView.swift */; };
 		1B27241B2C14D23600EE2AFB /* EasingDemoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B27241A2C14D23600EE2AFB /* EasingDemoCell.swift */; };
 		1B27241D2C14D28200EE2AFB /* EasingChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B27241C2C14D28200EE2AFB /* EasingChartView.swift */; };
+		1B27241F2C15C3D800EE2AFB /* EasingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B27241E2C15C3D800EE2AFB /* EasingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1B2723E92C1473DC00EE2AFB /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B2723EC2C1473DC00EE2AFB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1B2723EE2C1473DC00EE2AFB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		1B2723F02C1473DC00EE2AFB /* EasingDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasingDemoViewController.swift; sourceTree = "<group>"; };
+		1B2723F02C1473DC00EE2AFB /* EasingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasingListViewController.swift; sourceTree = "<group>"; };
 		1B2723F52C1473DE00EE2AFB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1B2723F82C1473DE00EE2AFB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1B2723FA2C1473DE00EE2AFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -42,9 +43,10 @@
 		1B2724062C14740C00EE2AFB /* UIColor+Interpolatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Interpolatable.swift"; sourceTree = "<group>"; };
 		1B2724082C14740C00EE2AFB /* CGPath+PathElements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPath+PathElements.swift"; sourceTree = "<group>"; };
 		1B2724092C14740C00EE2AFB /* CubicBezierInterpolator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CubicBezierInterpolator.swift; sourceTree = "<group>"; };
-		1B2724172C14D20200EE2AFB /* AdaptiveHeightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveHeightView.swift; sourceTree = "<group>"; };
+		1B2724172C14D20200EE2AFB /* AdaptiveContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveContentView.swift; sourceTree = "<group>"; };
 		1B27241A2C14D23600EE2AFB /* EasingDemoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasingDemoCell.swift; sourceTree = "<group>"; };
 		1B27241C2C14D28200EE2AFB /* EasingChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasingChartView.swift; sourceTree = "<group>"; };
+		1B27241E2C15C3D800EE2AFB /* EasingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasingViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,10 +81,11 @@
 		1B2723EB2C1473DC00EE2AFB /* Demo */ = {
 			isa = PBXGroup;
 			children = (
-				1B2724172C14D20200EE2AFB /* AdaptiveHeightView.swift */,
+				1B2724172C14D20200EE2AFB /* AdaptiveContentView.swift */,
 				1B27241C2C14D28200EE2AFB /* EasingChartView.swift */,
 				1B27241A2C14D23600EE2AFB /* EasingDemoCell.swift */,
-				1B2723F02C1473DC00EE2AFB /* EasingDemoViewController.swift */,
+				1B2723F02C1473DC00EE2AFB /* EasingListViewController.swift */,
+				1B27241E2C15C3D800EE2AFB /* EasingViewController.swift */,
 				1B2723EC2C1473DC00EE2AFB /* AppDelegate.swift */,
 				1B2723EE2C1473DC00EE2AFB /* SceneDelegate.swift */,
 				1B2723F52C1473DE00EE2AFB /* Assets.xcassets */,
@@ -208,7 +211,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1B2723F12C1473DC00EE2AFB /* EasingDemoViewController.swift in Sources */,
+				1B2723F12C1473DC00EE2AFB /* EasingListViewController.swift in Sources */,
 				1B2724112C14740C00EE2AFB /* UIColor+Interpolatable.swift in Sources */,
 				1B27240F2C14740C00EE2AFB /* Interpolatable.swift in Sources */,
 				1B27240D2C14740C00EE2AFB /* Easing+CAMediaTimeFunction.swift in Sources */,
@@ -217,7 +220,8 @@
 				1B2723ED2C1473DC00EE2AFB /* AppDelegate.swift in Sources */,
 				1B27240E2C14740C00EE2AFB /* CGPrimitives+Interpolatable.swift in Sources */,
 				1B27240C2C14740C00EE2AFB /* Easing.swift in Sources */,
-				1B2724182C14D20200EE2AFB /* AdaptiveHeightView.swift in Sources */,
+				1B2724182C14D20200EE2AFB /* AdaptiveContentView.swift in Sources */,
+				1B27241F2C15C3D800EE2AFB /* EasingViewController.swift in Sources */,
 				1B27241D2C14D28200EE2AFB /* EasingChartView.swift in Sources */,
 				1B27241B2C14D23600EE2AFB /* EasingDemoCell.swift in Sources */,
 				1B2724122C14740C00EE2AFB /* CGPath+PathElements.swift in Sources */,

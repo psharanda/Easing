@@ -5,7 +5,7 @@
 import FixFlex
 import UIKit
 
-class EasingChartView: AdaptiveHeightView {
+class EasingChartView: AdaptiveContentView {
     private let easingLayer = CAShapeLayer()
     private let xAxisLayer = CAShapeLayer()
     private let yAxisLayer = CAShapeLayer()
@@ -45,11 +45,17 @@ class EasingChartView: AdaptiveHeightView {
 
     var easing: Easing? {
         didSet {
-            setNeedsLayoutSubviewsForWidth()
+            invalidateContentRect()
         }
     }
 
-    override func layoutSubviews(forWidth width: CGFloat) -> CGFloat {
+    override func contentRect(forBounds bounds: CGRect) -> CGRect {
+        if bounds.width > UIView.layoutFittingExpandedSize.width {
+            return bounds
+        }
+        
+        let width = bounds.width
+        
         let xAxisPath = UIBezierPath()
         xAxisPath.move(to: CGPoint(x: 0, y: width))
         xAxisPath.addLine(to: CGPoint(x: width, y: width))
@@ -89,7 +95,7 @@ class EasingChartView: AdaptiveHeightView {
 
         self.pathBounds = pathBounds
 
-        return easingPath.bounds.size.height
+        return CGRect(x: 0, y: 0, width: width, height: pathBounds.height)
     }
 
     var pathBounds: CGRect?
