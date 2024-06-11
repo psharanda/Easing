@@ -5,7 +5,7 @@ The Easing library is a comprehensive set of easing functions, useful for intera
 
 ## Features
 
-- Unified [set](#reference) of easing functions ([])
+- Unified [set](#reference) of easing functions
 - Easy-to-use 'swifty' API to invoke calculations
 - Interpolation shorthands for commonly used types like `CGPoint`, `CGSize`, `CGTransform`, `UIColor` and `UIBezierPath`
 - Arbitrary cubic bezier based easings (see `.cubicBezier(...)`)
