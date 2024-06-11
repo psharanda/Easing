@@ -55,21 +55,21 @@ public enum Easing {
     case custom((Double) -> Double)
 
     /**
-      Calculate value g where g1 = 0, d1 = 0, g2 = 1, d2 = 1
+      Calculate d value for g, where g1 = 0, d1 = 0, g2 = 1, d2 = 1
      */
     public func calculate(_ g: Double, clamp: Bool = true) -> Double {
         return calculate(g1: 0, d1: 0, g2: 1, d2: 1, g: g, clamp: clamp)
     }
 
     /**
-      Calculate value g where g1 = 0, d1 = d1, g2 = 1, d2 = d2
+      Calculate d value for g, where g1 = 0, d1 = d1, g2 = 1, d2 = d2
      */
     public func calculate(d1: Double, d2: Double, g: Double, clamp: Bool = true) -> Double {
         return calculate(g1: 0, d1: d1, g2: 1, d2: d2, g: g, clamp: clamp)
     }
 
     /**
-      Calculate value g where g1 = g1, d1 = d1, g2 = g2, d2 = d2
+      Calculate d value for g, where g1 = g1, d1 = d1, g2 = g2, d2 = d2
      */
     public func calculate(
         g1: Double, d1: Double, g2: Double, d2: Double, g: Double, clamp: Bool = true
@@ -163,7 +163,7 @@ public enum Easing {
         }
     }
 
-    //  Based on https://github.com/warrenm/AHEasing
+    //  Based on https://github.com/warrenm/AHEasing and https://github.com/ai/easings.net (https://easings.net)
 
     // Modeled after the line y = x
     private static func _linear(_ p: Double) -> Double {
