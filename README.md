@@ -1,19 +1,34 @@
 <p align="center">
 <img src="Readme/logo.png" width="50%" alt="Easing Logo" />
 </p>
-Easing library is a comprehensive set of easing functions, useful for interactive animations and other time-based calculations where smooth transitions are necessary.
+The Easing library is a comprehensive set of easing functions, useful for interactive transitions and other time-based calculations.
 
 ## Features
 
-- Unified set of easing functions
+- Unified [set](#reference) of easing functions ([])
 - Easy-to-use 'swifty' API to invoke calculations
-- Interpolation shorthands for the most popular primitive types like CGPoint, CGSize, CGTransform, UIColor and UIBezierPath
-- Bridge to CAMediaTimingFunction
-- Arbitrary cubic bezier based easings
+- Interpolation shorthands for commonly used types like `CGPoint`, `CGSize`, `CGTransform`, `UIColor` and `UIBezierPath`
+- Arbitrary cubic bezier based easings (see `.cubicBezier(...)`)
+- Emulate default easings from iOS (see `.caEaseIn`, `.caEaseOut`, `.caEaseInEaseOut`)
 - Interactive demo app
 - Supports iOS 12.0+ / Mac OS X 10.13+ / tvOS 12.0+ / watchOS 4.0+ / visionOS 1.0+
 
 ## Usage
+
+### Basic
+
+````swift
+
+let startValue = 20.0
+let endValue = 60.0
+let progress = 0.5  // Assume a progress variable that ranges from 0 to 1
+
+let valueAtProgress = Easing.cubicEaseIn.calculate(
+    d1: startValue,
+    d2: endValue,
+    g: progress
+)
+````
 
 ### Real world example
 
@@ -40,8 +55,11 @@ headerView.alpha = Easing.quadraticEaseInOut.calculate(
 ````swift
 let startTransform = CGAffineTransform.identity
 let endTransform = CGAffineTransform(scaleX: 2, y: 2)
+let progress = 0.5  // Assume a progress variable that ranges from 0 to 1
 
-transformDemoView.transform = startTransform.interpolate(to: endTransform, progress: progress, easing: .linear)
+view.transform = startTransform.interpolate(to: endTransform,
+                                      progress: progress,
+                                        easing: .linear)
 
 ````
 
@@ -111,7 +129,7 @@ https://github.com/psharanda/Easing.git
 
 ## References
 
-The main set of easing functions is a Swift port of https://github.com/warrenm/AHEasing which is a port of https://github.com/ai/easings.net (https://easings.net)
+The main set of easing functions is a Swift port of https://github.com/warrenm/AHEasing and https://github.com/ai/easings.net
 
 `CubicBezierInterpolator` is a Swift port of `nsSMILKeySpline` code from Mozilla https://github.com/mozilla-services/services-central-legacy/blob/master/content/smil/nsSMILKeySpline.cpp
 

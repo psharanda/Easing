@@ -71,9 +71,7 @@ public enum Easing {
     /**
       Calculate d value for g, where g1 = g1, d1 = d1, g2 = g2, d2 = d2
      */
-    public func calculate(
-        g1: Double, d1: Double, g2: Double, d2: Double, g: Double, clamp: Bool = true
-    ) -> Double {
+    public func calculate(g1: Double, d1: Double, g2: Double, d2: Double, g: Double, clamp: Bool = true) -> Double {
         var g = g
 
         if clamp {
@@ -163,7 +161,7 @@ public enum Easing {
         }
     }
 
-    //  Based on https://github.com/warrenm/AHEasing and https://github.com/ai/easings.net (https://easings.net)
+    //  Based on https://github.com/warrenm/AHEasing and https://github.com/ai/easings.net
 
     // Modeled after the line y = x
     private static func _linear(_ p: Double) -> Double {
