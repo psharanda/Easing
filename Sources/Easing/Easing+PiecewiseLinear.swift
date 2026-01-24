@@ -4,7 +4,26 @@
 
 import Foundation
 
-struct PiecewiseLinearSolver {
+public struct PiecewiseLinearStop {
+    public var x: Double?
+    public var y: Double
+
+    public init(_ y: Double, at x: Double? = nil) {
+        self.y = y
+        self.x = x
+    }
+}
+
+public extension Easing {
+    static func piecewiseLinear(_ stops: [PiecewiseLinearStop]) -> Easing {
+        let resolvedStops = PiecewiseLinearSolver.resolveStops(stops)
+        return Easing { p in
+            PiecewiseLinearSolver.evaluate(p, stops: resolvedStops)
+        }
+    }
+}
+
+private struct PiecewiseLinearSolver {
     static func resolveStops(_ stops: [PiecewiseLinearStop]) -> [(x: Double, y: Double)] {
         guard !stops.isEmpty else {
             return []

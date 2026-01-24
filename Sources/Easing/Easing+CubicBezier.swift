@@ -4,8 +4,17 @@
 
 import Foundation
 
+public extension Easing {
+    static func cubicBezier(_ x1: Double, _ y1: Double, _ x2: Double, _ y2: Double) -> Easing {
+        let calculator = CubicBezierCalculator(x1: x1, y1: y1, x2: x2, y2: y2)
+        return Easing { p in
+            calculator.calculate(p)
+        }
+    }
+}
+
 //  Based on nsSMILKeySpline from Mozilla https://github.com/mozilla-services/services-central-legacy/blob/master/content/smil/nsSMILKeySpline.cpp
-struct CubicBezierCalculator {
+private struct CubicBezierCalculator {
     let x1: Double
     let y1: Double
     let x2: Double
@@ -154,3 +163,4 @@ struct CubicBezierCalculator {
         return currentT
     }
 }
+

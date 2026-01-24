@@ -19,7 +19,6 @@
 		1B2724102C14740C00EE2AFB /* UIBezierPath+Interpolatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2724052C14740C00EE2AFB /* UIBezierPath+Interpolatable.swift */; };
 		1B2724112C14740C00EE2AFB /* UIColor+Interpolatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2724062C14740C00EE2AFB /* UIColor+Interpolatable.swift */; };
 		1B2724122C14740C00EE2AFB /* CGPath+PathElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2724082C14740C00EE2AFB /* CGPath+PathElements.swift */; };
-		1B2724132C14740C00EE2AFB /* CubicBezierInterpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2724092C14740C00EE2AFB /* CubicBezierInterpolator.swift */; };
 		1B2724162C14816200EE2AFB /* FixFlex in Frameworks */ = {isa = PBXBuildFile; productRef = 1B2724152C14816200EE2AFB /* FixFlex */; };
 		1B2724182C14D20200EE2AFB /* AdaptiveContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2724172C14D20200EE2AFB /* AdaptiveContentView.swift */; };
 		1B27241B2C14D23600EE2AFB /* EasingDemoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B27241A2C14D23600EE2AFB /* EasingDemoCell.swift */; };
@@ -28,8 +27,10 @@
 		1B2724272C15CB2700EE2AFB /* DemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2724262C15CB2700EE2AFB /* DemoTests.swift */; };
 		1B27242F2C15CB9D00EE2AFB /* iOSSnapshotTestCase in Frameworks */ = {isa = PBXBuildFile; productRef = 1B27242E2C15CB9D00EE2AFB /* iOSSnapshotTestCase */; };
 		1B2724312C15CBDB00EE2AFB /* EasingDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2724302C15CBDB00EE2AFB /* EasingDemo.swift */; };
-		1B360D2D2F2551AA00001B2C /* PiecewiseLinearSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B360D2B2F2551AA00001B2C /* PiecewiseLinearSolver.swift */; };
-		1B360D2E2F2551AA00001B2C /* SpringSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B360D2C2F2551AA00001B2C /* SpringSolver.swift */; };
+		1B360D322F25567500001B2C /* Easing+Spring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B360D312F25567500001B2C /* Easing+Spring.swift */; };
+		1B360D332F25567500001B2C /* Easing+PiecewiseLinear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B360D302F25567500001B2C /* Easing+PiecewiseLinear.swift */; };
+		1B360D342F25567500001B2C /* Easing+CubicBezier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B360D2F2F25567500001B2C /* Easing+CubicBezier.swift */; };
+		1B360D362F25572600001B2C /* Easing+Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B360D352F25572600001B2C /* Easing+Common.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,7 +58,6 @@
 		1B2724052C14740C00EE2AFB /* UIBezierPath+Interpolatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIBezierPath+Interpolatable.swift"; sourceTree = "<group>"; };
 		1B2724062C14740C00EE2AFB /* UIColor+Interpolatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Interpolatable.swift"; sourceTree = "<group>"; };
 		1B2724082C14740C00EE2AFB /* CGPath+PathElements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPath+PathElements.swift"; sourceTree = "<group>"; };
-		1B2724092C14740C00EE2AFB /* CubicBezierInterpolator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CubicBezierInterpolator.swift; sourceTree = "<group>"; };
 		1B2724172C14D20200EE2AFB /* AdaptiveContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveContentView.swift; sourceTree = "<group>"; };
 		1B27241A2C14D23600EE2AFB /* EasingDemoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasingDemoCell.swift; sourceTree = "<group>"; };
 		1B27241C2C14D28200EE2AFB /* EasingChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasingChartView.swift; sourceTree = "<group>"; };
@@ -65,8 +65,10 @@
 		1B2724242C15CB2700EE2AFB /* DemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B2724262C15CB2700EE2AFB /* DemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoTests.swift; sourceTree = "<group>"; };
 		1B2724302C15CBDB00EE2AFB /* EasingDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasingDemo.swift; sourceTree = "<group>"; };
-		1B360D2B2F2551AA00001B2C /* PiecewiseLinearSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PiecewiseLinearSolver.swift; sourceTree = "<group>"; };
-		1B360D2C2F2551AA00001B2C /* SpringSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpringSolver.swift; sourceTree = "<group>"; };
+		1B360D2F2F25567500001B2C /* Easing+CubicBezier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Easing+CubicBezier.swift"; sourceTree = "<group>"; };
+		1B360D302F25567500001B2C /* Easing+PiecewiseLinear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Easing+PiecewiseLinear.swift"; sourceTree = "<group>"; };
+		1B360D312F25567500001B2C /* Easing+Spring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Easing+Spring.swift"; sourceTree = "<group>"; };
+		1B360D352F25572600001B2C /* Easing+Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Easing+Common.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +132,10 @@
 			isa = PBXGroup;
 			children = (
 				1B2724002C14740C00EE2AFB /* Easing.swift */,
+				1B360D352F25572600001B2C /* Easing+Common.swift */,
+				1B360D2F2F25567500001B2C /* Easing+CubicBezier.swift */,
+				1B360D302F25567500001B2C /* Easing+PiecewiseLinear.swift */,
+				1B360D312F25567500001B2C /* Easing+Spring.swift */,
 				1B2724012C14740C00EE2AFB /* Easing+CAMediaTimeFunction.swift */,
 			);
 			path = Easing;
@@ -149,10 +155,7 @@
 		1B27240A2C14740C00EE2AFB /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				1B360D2B2F2551AA00001B2C /* PiecewiseLinearSolver.swift */,
-				1B360D2C2F2551AA00001B2C /* SpringSolver.swift */,
 				1B2724082C14740C00EE2AFB /* CGPath+PathElements.swift */,
-				1B2724092C14740C00EE2AFB /* CubicBezierInterpolator.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -228,7 +231,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1530;
-				LastUpgradeCheck = 1530;
+				LastUpgradeCheck = 2620;
 				TargetAttributes = {
 					1B2723E82C1473DC00EE2AFB = {
 						CreatedOnToolsVersion = 15.3;
@@ -287,17 +290,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B2723F12C1473DC00EE2AFB /* EasingListViewController.swift in Sources */,
+				1B360D322F25567500001B2C /* Easing+Spring.swift in Sources */,
+				1B360D332F25567500001B2C /* Easing+PiecewiseLinear.swift in Sources */,
+				1B360D342F25567500001B2C /* Easing+CubicBezier.swift in Sources */,
 				1B2724112C14740C00EE2AFB /* UIColor+Interpolatable.swift in Sources */,
 				1B27240F2C14740C00EE2AFB /* Interpolatable.swift in Sources */,
 				1B27240D2C14740C00EE2AFB /* Easing+CAMediaTimeFunction.swift in Sources */,
-				1B2724132C14740C00EE2AFB /* CubicBezierInterpolator.swift in Sources */,
 				1B2724102C14740C00EE2AFB /* UIBezierPath+Interpolatable.swift in Sources */,
-				1B360D2D2F2551AA00001B2C /* PiecewiseLinearSolver.swift in Sources */,
-				1B360D2E2F2551AA00001B2C /* SpringSolver.swift in Sources */,
 				1B2723ED2C1473DC00EE2AFB /* AppDelegate.swift in Sources */,
 				1B2724312C15CBDB00EE2AFB /* EasingDemo.swift in Sources */,
 				1B27240E2C14740C00EE2AFB /* CGPrimitives+Interpolatable.swift in Sources */,
 				1B27240C2C14740C00EE2AFB /* Easing.swift in Sources */,
+				1B360D362F25572600001B2C /* Easing+Common.swift in Sources */,
 				1B2724182C14D20200EE2AFB /* AdaptiveContentView.swift in Sources */,
 				1B27241F2C15C3D800EE2AFB /* EasingViewController.swift in Sources */,
 				1B27241D2C14D28200EE2AFB /* EasingChartView.swift in Sources */,
@@ -372,6 +376,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 9SCKTYVAB7;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -395,6 +400,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -435,6 +441,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 9SCKTYVAB7;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -451,6 +458,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -463,7 +471,6 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 9SCKTYVAB7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Demo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -491,7 +498,6 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 9SCKTYVAB7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Demo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -518,7 +524,6 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 9SCKTYVAB7;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = test.psharanda.Easing.Demo.DemoTests;
@@ -536,7 +541,6 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 9SCKTYVAB7;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = test.psharanda.Easing.Demo.DemoTests;
