@@ -10,17 +10,75 @@
     extension UIColor: Interpolatable {
         // TODO: check alternative interpolations https://raphlinus.github.io/color/2021/01/18/oklab-critique.html
 
+        private func rgbaComponents() -> (CGFloat, CGFloat, CGFloat, CGFloat) {
+            var r: CGFloat = 0
+            var g: CGFloat = 0
+            var b: CGFloat = 0
+            var a: CGFloat = 0
+            if getRed(&r, green: &g, blue: &b, alpha: &a) {
+                return (r, g, b, a)
+            }
+
+            var w: CGFloat = 0
+            if getWhite(&w, alpha: &a) {
+                return (w, w, w, a)
+            }
+
+            let cg = cgColor
+            if let comps = cg.components {
+                if comps.count == 2 {
+                    return (comps[0], comps[0], comps[0], comps[1])
+                }
+                if comps.count >= 3 {
+                    return (comps[0], comps[1], comps[2], cg.alpha)
+                }
+            }
+
+            return (0, 0, 0, cg.alpha)
+        }
+
+        private static func rgbToHsb(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat) -> (CGFloat, CGFloat, CGFloat) {
+            let maxValue = max(r, max(g, b))
+            let minValue = min(r, min(g, b))
+            let delta = maxValue - minValue
+
+            var h: CGFloat = 0
+            if delta != 0 {
+                if maxValue == r {
+                    h = (g - b) / delta
+                } else if maxValue == g {
+                    h = ((b - r) / delta) + 2
+                } else {
+                    h = ((r - g) / delta) + 4
+                }
+                h /= 6
+                if h < 0 {
+                    h += 1
+                }
+            }
+
+            let s = maxValue == 0 ? 0 : (delta / maxValue)
+            let v = maxValue
+            return (h, s, v)
+        }
+
+        private func hsbComponents() -> (CGFloat, CGFloat, CGFloat, CGFloat) {
+            var h: CGFloat = 0
+            var s: CGFloat = 0
+            var b: CGFloat = 0
+            var a: CGFloat = 0
+            if getHue(&h, saturation: &s, brightness: &b, alpha: &a) {
+                return (h, s, b, a)
+            }
+
+            let (r, g, blue, alpha) = rgbaComponents()
+            let (h2, s2, b2) = Self.rgbToHsb(r, g, blue)
+            return (h2, s2, b2, alpha)
+        }
+
         public func interpolateHSB(to: UIColor, progress: Double, easing: Easing) -> Self {
-            var h1: CGFloat = 0
-            var s1: CGFloat = 0
-            var b1: CGFloat = 0
-            var a1: CGFloat = 0
-            getHue(&h1, saturation: &s1, brightness: &b1, alpha: &a1)
-            var h2: CGFloat = 0
-            var s2: CGFloat = 0
-            var b2: CGFloat = 0
-            var a2: CGFloat = 0
-            to.getHue(&h2, saturation: &s2, brightness: &b2, alpha: &a2)
+            let (h1, s1, b1, a1) = hsbComponents()
+            let (h2, s2, b2, a2) = to.hsbComponents()
 
             return Self(
                 hue: h1.interpolate(to: h2, progress: progress, easing: easing),
@@ -31,16 +89,8 @@
         }
 
         public func interpolate(to: UIColor, progress: Double, easing: Easing) -> Self {
-            var r1: CGFloat = 0
-            var g1: CGFloat = 0
-            var b1: CGFloat = 0
-            var a1: CGFloat = 0
-            getRed(&r1, green: &g1, blue: &b1, alpha: &a1)
-            var r2: CGFloat = 0
-            var g2: CGFloat = 0
-            var b2: CGFloat = 0
-            var a2: CGFloat = 0
-            to.getRed(&r2, green: &g2, blue: &b2, alpha: &a2)
+            let (r1, g1, b1, a1) = rgbaComponents()
+            let (r2, g2, b2, a2) = to.rgbaComponents()
 
             return Self(
                 red: r1.interpolate(to: r2, progress: progress, easing: easing),
