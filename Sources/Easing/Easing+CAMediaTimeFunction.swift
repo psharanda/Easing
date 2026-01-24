@@ -13,7 +13,7 @@
         }()
 
         static let caEaseOut: Easing = {
-            let f = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+            let f = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
             return Easing.cubicBezierEasingForMediaFunction(f)
         }()
 

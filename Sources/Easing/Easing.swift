@@ -74,6 +74,10 @@ public enum Easing {
     public func calculate(g1: Double, d1: Double, g2: Double, d2: Double, g: Double, clamp: Bool = true) -> Double {
         var g = g
 
+        if g1 == g2 {
+            return d1
+        }
+
         if clamp {
             g = max(min(g1, g2), g)
             g = min(max(g1, g2), g)
@@ -93,7 +97,7 @@ public enum Easing {
         case .smootherStep:
             return Easing._smootherStep
         case .quadraticEaseIn:
-            return Easing._quarticEaseIn
+            return Easing._quadraticEaseIn
         case .quadraticEaseOut:
             return Easing._quadraticEaseOut
         case .quadraticEaseInOut:
