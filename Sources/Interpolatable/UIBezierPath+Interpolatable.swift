@@ -2,7 +2,7 @@
 //  Copyright © 2016-present, Pavel Sharanda. All rights reserved.
 //
 
-#if !os(macOS)
+#if canImport(UIKit)
 
     import Foundation
     import UIKit
