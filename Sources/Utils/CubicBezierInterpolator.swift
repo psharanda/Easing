@@ -12,6 +12,7 @@ struct CubicBezierCalculator {
     let y2: Double
 
     private let sampleValues: [Double]
+    private static let cacheLock = NSLock()
 
     init(x1: Double, y1: Double, x2: Double, y2: Double, samplesCount: Int = 10) {
         self.x1 = x1
@@ -88,9 +89,12 @@ struct CubicBezierCalculator {
 
         let key = SampleKey(x1: x1, x2: x2, number: samplesCount)
 
+        cacheLock.lock()
         if let cached = Cache.dict[key] {
+            cacheLock.unlock()
             return cached
         }
+        cacheLock.unlock()
 
         let stepSize = 1.0 / Double(samplesCount)
 
@@ -99,7 +103,9 @@ struct CubicBezierCalculator {
             sampleValues.append(calculateBezier(Double(i) * stepSize, x1, x2))
         }
 
+        cacheLock.lock()
         Cache.dict[key] = sampleValues
+        cacheLock.unlock()
 
         return sampleValues
     }
