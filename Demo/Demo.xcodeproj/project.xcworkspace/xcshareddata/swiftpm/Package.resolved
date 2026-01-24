@@ -6,8 +6,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/psharanda/FixFlex",
       "state" : {
-        "revision" : "83a7d0f58fa5b98e86712d26c179122ae10c1445",
-        "version" : "1.2.1"
+        "revision" : "15241ffee7f95092967b29883748890ea15658e0",
+        "version" : "1.3.0"
       }
     },
     {
