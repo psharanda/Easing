@@ -85,14 +85,14 @@ view.transform = startTransform.interpolate(to: endTransform,
 
 ### Piecewise linear (CSS `linear()` style)
 
+CSS `linear(0, 0.25 75%, 1)` translates to:
+
 ```swift
 let easing = Easing.piecewiseLinear([
-    PiecewiseLinearStop(0),            // x defaults to 0
-    PiecewiseLinearStop(1, at: 0.6),   // explicit stop position
-    PiecewiseLinearStop(0)             // x defaults to 1
+    PiecewiseLinearStop(0),  // x defaults to 0
+    PiecewiseLinearStop(0.25, at: 0.75), // explicit stop position
+    PiecewiseLinearStop(1) // x defaults to 1
 ])
-
-let value = easing.calculate(0.75)
 ```
 
 ### Spring
@@ -111,10 +111,10 @@ let customSpring = Easing.spring(
 
 ## Reference
 
-|                        Easing                         |                                                                     Curve                                                                     |
+|                        Easing                         |                                                                                                                                               |
 | :---------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------: |
 |                       `.linear`                       |                       <img src="Demo/Ref/ReferenceImages_64/DemoTests.EasingDemoTests/test_linear@3x.png" width="100"/>                       |
-|            `.piecewiseLinear(0, 1@0.6, 0)`            |            <img src="Demo/Ref/ReferenceImages_64/DemoTests.EasingDemoTests/test_piecewiseLinear_0__1_0_6__0_@3x.png" width="100"/>            |
+|          `.piecewiseLinear(0, 0.25@0.75, 1)`          |          <img src="Demo/Ref/ReferenceImages_64/DemoTests.EasingDemoTests/test_piecewiseLinear_0__0_25_0_75__1_@3x.png" width="100"/>          |
 |              `.piecewiseLinear(spring)`               |              <img src="Demo/Ref/ReferenceImages_64/DemoTests.EasingDemoTests/test_piecewiseLinear_spring_@3x.png" width="100"/>               |
 |               `.spring(.swiftUISpring)`               |               <img src="Demo/Ref/ReferenceImages_64/DemoTests.EasingDemoTests/test_spring__swiftUISpring_@3x.png" width="100"/>               |
 |         `.spring(.swiftUIInteractiveSpring)`          |         <img src="Demo/Ref/ReferenceImages_64/DemoTests.EasingDemoTests/test_spring__swiftUIInteractiveSpring_@3x.png" width="100"/>          |

@@ -11,11 +11,11 @@ struct EasingDemoItem {
     static let allItems = [
         EasingDemoItem(name: "linear", easing: .linear),
         EasingDemoItem(
-            name: "piecewiseLinear(0, 1@0.6, 0)",
+            name: "piecewiseLinear(0, 0.25@0.75, 1)", // linear(0, 0.25 75%, 1)
             easing: .piecewiseLinear([
-                PiecewiseLinearStop(0, at: 0),
-                PiecewiseLinearStop(1, at: 0.6),
-                PiecewiseLinearStop(0, at: 1),
+                PiecewiseLinearStop(0), // implicit 0%
+                PiecewiseLinearStop(0.25, at: 0.75), // 75%
+                PiecewiseLinearStop(1) // implicit 100%
             ])
         ),
         EasingDemoItem(
