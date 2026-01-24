@@ -7,7 +7,7 @@ import Foundation
 struct EasingDemoItem {
     let name: String
     let easing: Easing
-    
+
     static let allItems = [
         EasingDemoItem(name: "linear", easing: .linear),
         EasingDemoItem(

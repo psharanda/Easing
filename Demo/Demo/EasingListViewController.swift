@@ -6,8 +6,6 @@ import FixFlex
 import UIKit
 
 class EasingListViewController: UITableViewController {
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Easing Demo"
@@ -32,4 +30,3 @@ class EasingListViewController: UITableViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
 }
-

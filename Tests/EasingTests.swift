@@ -2,10 +2,10 @@
 //  Copyright © 2016-present, Pavel Sharanda. All rights reserved.
 //
 
+import CoreGraphics
 import Easing
 import Foundation
 import XCTest
-import CoreGraphics
 #if canImport(QuartzCore)
 import QuartzCore
 #endif

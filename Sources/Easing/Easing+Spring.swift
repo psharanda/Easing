@@ -89,7 +89,7 @@ public extension Easing {
     }
 }
 
-private struct SpringSolver {
+private enum SpringSolver {
     static func normalizedValue(
         progress: Double,
         mass: Double,

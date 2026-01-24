@@ -4,54 +4,53 @@
 
 import Foundation
 
-extension Easing {
+public extension Easing {
+    static let linear = Easing(Easing._linear)
 
-    public static let linear = Easing(Easing._linear)
+    static let smoothStep = Easing(Easing._smoothStep)
+    static let smootherStep = Easing(Easing._smootherStep)
 
-    public static let smoothStep = Easing(Easing._smoothStep)
-    public static let smootherStep = Easing(Easing._smootherStep)
+    static let quadraticEaseIn = Easing(Easing._quadraticEaseIn)
+    static let quadraticEaseOut = Easing(Easing._quadraticEaseOut)
+    static let quadraticEaseInOut = Easing(Easing._quadraticEaseInOut)
 
-    public static let quadraticEaseIn = Easing(Easing._quadraticEaseIn)
-    public static let quadraticEaseOut = Easing(Easing._quadraticEaseOut)
-    public static let quadraticEaseInOut = Easing(Easing._quadraticEaseInOut)
+    static let cubicEaseIn = Easing(Easing._cubicEaseIn)
+    static let cubicEaseOut = Easing(Easing._cubicEaseOut)
+    static let cubicEaseInOut = Easing(Easing._cubicEaseInOut)
 
-    public static let cubicEaseIn = Easing(Easing._cubicEaseIn)
-    public static let cubicEaseOut = Easing(Easing._cubicEaseOut)
-    public static let cubicEaseInOut = Easing(Easing._cubicEaseInOut)
+    static let quarticEaseIn = Easing(Easing._quarticEaseIn)
+    static let quarticEaseOut = Easing(Easing._quarticEaseOut)
+    static let quarticEaseInOut = Easing(Easing._quarticEaseInOut)
 
-    public static let quarticEaseIn = Easing(Easing._quarticEaseIn)
-    public static let quarticEaseOut = Easing(Easing._quarticEaseOut)
-    public static let quarticEaseInOut = Easing(Easing._quarticEaseInOut)
+    static let quinticEaseIn = Easing(Easing._quinticEaseIn)
+    static let quinticEaseOut = Easing(Easing._quinticEaseOut)
+    static let quinticEaseInOut = Easing(Easing._quinticEaseInOut)
 
-    public static let quinticEaseIn = Easing(Easing._quinticEaseIn)
-    public static let quinticEaseOut = Easing(Easing._quinticEaseOut)
-    public static let quinticEaseInOut = Easing(Easing._quinticEaseInOut)
+    static let sineEaseIn = Easing(Easing._sineEaseIn)
+    static let sineEaseOut = Easing(Easing._sineEaseOut)
+    static let sineEaseInOut = Easing(Easing._sineEaseInOut)
 
-    public static let sineEaseIn = Easing(Easing._sineEaseIn)
-    public static let sineEaseOut = Easing(Easing._sineEaseOut)
-    public static let sineEaseInOut = Easing(Easing._sineEaseInOut)
+    static let circularEaseIn = Easing(Easing._circularEaseIn)
+    static let circularEaseOut = Easing(Easing._circularEaseOut)
+    static let circularEaseInOut = Easing(Easing._circularEaseInOut)
 
-    public static let circularEaseIn = Easing(Easing._circularEaseIn)
-    public static let circularEaseOut = Easing(Easing._circularEaseOut)
-    public static let circularEaseInOut = Easing(Easing._circularEaseInOut)
+    static let exponentialEaseIn = Easing(Easing._exponentialEaseIn)
+    static let exponentialEaseOut = Easing(Easing._exponentialEaseOut)
+    static let exponentialEaseInOut = Easing(Easing._exponentialEaseInOut)
 
-    public static let exponentialEaseIn = Easing(Easing._exponentialEaseIn)
-    public static let exponentialEaseOut = Easing(Easing._exponentialEaseOut)
-    public static let exponentialEaseInOut = Easing(Easing._exponentialEaseInOut)
+    static let elasticEaseIn = Easing(Easing._elasticEaseIn)
+    static let elasticEaseOut = Easing(Easing._elasticEaseOut)
+    static let elasticEaseInOut = Easing(Easing._elasticEaseInOut)
 
-    public static let elasticEaseIn = Easing(Easing._elasticEaseIn)
-    public static let elasticEaseOut = Easing(Easing._elasticEaseOut)
-    public static let elasticEaseInOut = Easing(Easing._elasticEaseInOut)
+    static let backEaseIn = Easing(Easing._backEaseIn)
+    static let backEaseOut = Easing(Easing._backEaseOut)
+    static let backEaseInOut = Easing(Easing._backEaseInOut)
 
-    public static let backEaseIn = Easing(Easing._backEaseIn)
-    public static let backEaseOut = Easing(Easing._backEaseOut)
-    public static let backEaseInOut = Easing(Easing._backEaseInOut)
+    static let bounceEaseIn = Easing(Easing._bounceEaseIn)
+    static let bounceEaseOut = Easing(Easing._bounceEaseOut)
+    static let bounceEaseInOut = Easing(Easing._bounceEaseInOut)
 
-    public static let bounceEaseIn = Easing(Easing._bounceEaseIn)
-    public static let bounceEaseOut = Easing(Easing._bounceEaseOut)
-    public static let bounceEaseInOut = Easing(Easing._bounceEaseInOut)
-
-    public static func custom(_ f: @escaping (Double) -> Double) -> Easing {
+    static func custom(_ f: @escaping (Double) -> Double) -> Easing {
         return Easing(f)
     }
 
@@ -61,7 +60,6 @@ extension Easing {
     private static func _linear(_ p: Double) -> Double {
         return p
     }
-
 
     // fast but ugly easeInOut
     private static func _smoothStep(_ p: Double) -> Double {
@@ -294,5 +292,4 @@ extension Easing {
             return 0.5 * _bounceEaseOut(p * 2 - 1) + 0.5
         }
     }
-
 }

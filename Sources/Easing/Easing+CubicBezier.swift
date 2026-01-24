@@ -163,4 +163,3 @@ private struct CubicBezierCalculator {
         return currentT
     }
 }
-

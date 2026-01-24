@@ -7,15 +7,14 @@ import iOSSnapshotTestCase
 import XCTest
 
 final class EasingDemoTests: FBSnapshotTestCase {
-    
     override func setUp() {
         super.setUp()
         usesDrawViewHierarchyInRect = true
     }
-    
+
     func test() {
         // recordMode = true
-        
+
         for item in EasingDemoItem.allItems {
             let view = EasingChartView()
             view.easing = item.easing

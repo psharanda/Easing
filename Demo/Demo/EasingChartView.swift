@@ -53,9 +53,9 @@ class EasingChartView: AdaptiveContentView {
         if bounds.width > UIView.layoutFittingExpandedSize.width {
             return bounds
         }
-        
+
         let chartWidth = bounds.width - 2
-        
+
         let xAxisPath = UIBezierPath()
         xAxisPath.move(to: CGPoint(x: 0, y: chartWidth))
         xAxisPath.addLine(to: CGPoint(x: chartWidth, y: chartWidth))

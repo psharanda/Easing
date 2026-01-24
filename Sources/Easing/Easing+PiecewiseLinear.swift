@@ -23,7 +23,7 @@ public extension Easing {
     }
 }
 
-private struct PiecewiseLinearSolver {
+private enum PiecewiseLinearSolver {
     static func resolveStops(_ stops: [PiecewiseLinearStop]) -> [(x: Double, y: Double)] {
         guard !stops.isEmpty else {
             return []
