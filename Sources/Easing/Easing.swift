@@ -21,6 +21,11 @@ public struct Easing {
         self.easingFunction = easingFunction
     }
 
+    public enum SpringPreset {
+        case swiftUISpring
+        case swiftUIInteractiveSpring
+    }
+
     /**
       Calculate d value for g, where g1 = 0, d1 = 0, g2 = 1, d2 = 1
      */
@@ -106,6 +111,84 @@ public struct Easing {
     public static let bounceEaseIn = Easing(Easing._bounceEaseIn)
     public static let bounceEaseOut = Easing(Easing._bounceEaseOut)
     public static let bounceEaseInOut = Easing(Easing._bounceEaseInOut)
+
+    public static func spring(
+        _ preset: SpringPreset,
+        initialVelocity: Double,
+        overshootClamping: Bool = false
+    ) -> Easing {
+        switch preset {
+        case .swiftUISpring:
+            return spring(
+                response: 0.5,
+                dampingFraction: 0.825,
+                initialVelocity: initialVelocity,
+                overshootClamping: overshootClamping
+            )
+        case .swiftUIInteractiveSpring:
+            return spring(
+                response: 0.15,
+                dampingFraction: 0.86,
+                initialVelocity: initialVelocity,
+                overshootClamping: overshootClamping
+            )
+        }
+    }
+
+    public static func spring(
+        dampingRatio: Double,
+        response: Double,
+        initialVelocity: Double,
+        overshootClamping: Bool = false
+    ) -> Easing {
+        return spring(
+            response: response,
+            dampingFraction: dampingRatio,
+            initialVelocity: initialVelocity,
+            overshootClamping: overshootClamping
+        )
+    }
+
+    public static func spring(
+        response: Double,
+        dampingFraction: Double,
+        initialVelocity: Double,
+        overshootClamping: Bool = false
+    ) -> Easing {
+        let mass = 1.0
+        let angularFrequency = 2 * Double.pi / response
+        let stiffness = angularFrequency * angularFrequency * mass
+        let damping = 2 * dampingFraction * angularFrequency * mass
+        return spring(
+            mass: mass,
+            stiffness: stiffness,
+            damping: damping,
+            initialVelocity: initialVelocity,
+            duration: response,
+            overshootClamping: overshootClamping
+        )
+    }
+
+    public static func spring(
+        mass: Double,
+        stiffness: Double,
+        damping: Double,
+        initialVelocity: Double,
+        duration: Double,
+        overshootClamping: Bool = false
+    ) -> Easing {
+        return Easing { p in
+            Easing._spring(
+                p,
+                mass: mass,
+                stiffness: stiffness,
+                damping: damping,
+                initialVelocity: initialVelocity,
+                duration: duration,
+                overshootClamping: overshootClamping
+            )
+        }
+    }
 
     public static func cubicBezier(_ x1: Double, _ y1: Double, _ x2: Double, _ y2: Double) -> Easing {
         let calculator = CubicBezierCalculator(x1: x1, y1: y1, x2: x2, y2: y2)
@@ -454,6 +537,75 @@ public struct Easing {
             return 0.5 * _bounceEaseIn(p * 2)
         } else {
             return 0.5 * _bounceEaseOut(p * 2 - 1) + 0.5
+        }
+    }
+
+    private static func _spring(
+        _ p: Double,
+        mass: Double,
+        stiffness: Double,
+        damping: Double,
+        initialVelocity: Double,
+        duration: Double,
+        overshootClamping: Bool
+    ) -> Double {
+        if duration <= 0 || mass <= 0 || stiffness <= 0 {
+            return p
+        }
+
+        let t = p * duration
+        let value = _springValue(
+            t,
+            mass: mass,
+            stiffness: stiffness,
+            damping: damping,
+            initialVelocity: initialVelocity
+        )
+        let endValue = _springValue(
+            duration,
+            mass: mass,
+            stiffness: stiffness,
+            damping: damping,
+            initialVelocity: initialVelocity
+        )
+
+        var normalized = endValue == 0 ? value : (value / endValue)
+        if overshootClamping {
+            normalized = min(1, max(0, normalized))
+        }
+        return normalized
+    }
+
+    private static func _springValue(
+        _ t: Double,
+        mass: Double,
+        stiffness: Double,
+        damping: Double,
+        initialVelocity: Double
+    ) -> Double {
+        let angularFrequency = sqrt(stiffness / mass)
+        let dampingRatio = damping / (2 * sqrt(stiffness * mass))
+        let epsilon = 1e-6
+
+        if dampingRatio < 1 - epsilon {
+            let dampingFrequency = angularFrequency * sqrt(1 - dampingRatio * dampingRatio)
+            let expTerm = exp(-dampingRatio * angularFrequency * t)
+            let b = (initialVelocity - dampingRatio * angularFrequency) / dampingFrequency
+            let x = expTerm * (-cos(dampingFrequency * t) + b * sin(dampingFrequency * t))
+            return 1 + x
+        } else if abs(dampingRatio - 1) <= epsilon {
+            let expTerm = exp(-angularFrequency * t)
+            let b = initialVelocity - angularFrequency
+            let x = (-1 + b * t) * expTerm
+            return 1 + x
+        } else {
+            let z = sqrt(dampingRatio * dampingRatio - 1)
+            let r1 = -angularFrequency * (dampingRatio - z)
+            let r2 = -angularFrequency * (dampingRatio + z)
+            let c1 = (initialVelocity + r2) / (r1 - r2)
+            let c2 = -1 - c1
+            let x = c1 * exp(r1 * t) + c2 * exp(r2 * t)
+            return 1 + x
         }
     }
 }

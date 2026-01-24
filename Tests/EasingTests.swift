@@ -76,4 +76,18 @@ class EasingTests: XCTestCase {
         let val = easing.calculate(0.75)
         XCTAssertEqual(val, 0.5, accuracy: 1e-12)
     }
+
+    func testSpringNormalizesToOneAtEnd() {
+        let easing = Easing.spring(
+            mass: 1,
+            stiffness: 100,
+            damping: 10,
+            initialVelocity: 0,
+            duration: 1,
+            overshootClamping: false
+        )
+
+        XCTAssertEqual(easing.calculate(0), 0, accuracy: 1e-12)
+        XCTAssertEqual(easing.calculate(1), 1, accuracy: 1e-9)
+    }
 }

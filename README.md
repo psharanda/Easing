@@ -10,6 +10,7 @@ The Easing library is a comprehensive set of easing functions, useful for intera
 - Interpolation shorthands for commonly used types like `CGPoint`, `CGSize`, `CGTransform`, `UIColor` and `UIBezierPath`
 - Arbitrary cubic bezier based easings (see `.cubicBezier(...)`)
 - Piecewise linear easings with optional stop positions (CSS `linear()` style)
+- Spring-based easings with physics configuration
 - Emulate default easings from iOS (see `.caEaseIn`, `.caEaseOut`, `.caEaseInEaseOut`)
 - Interactive demo app
 - Supports iOS 12.0+ / Mac OS X 10.13+ / tvOS 12.0+ / watchOS 4.0+ / visionOS 1.0+
@@ -76,6 +77,20 @@ let easing = Easing.piecewiseLinear([
 let value = easing.calculate(0.75)
 ````
 
+### Spring
+
+````swift
+let swiftUISpring = Easing.spring(.swiftUISpring, initialVelocity: 0)
+
+let customSpring = Easing.spring(
+    mass: 1,
+    stiffness: 100,
+    damping: 10,
+    initialVelocity: 0,
+    duration: 1
+)
+````
+
 ## Reference
 
 |  Easing   |  Curve   |
@@ -83,6 +98,11 @@ let value = easing.calculate(0.75)
 |`.linear`|<img src="Demo/Ref/ReferenceImages_64/DemoTests.EasingDemoTests/test_linear@3x.png" width="100"/>|
 |`.piecewiseLinear(0, 1@0.6, 0)`|<img src="Demo/Ref/ReferenceImages_64/DemoTests.EasingDemoTests/test_piecewiseLinear_0__1_0_6__0_@3x.png" width="100"/>|
 |`.piecewiseLinear(spring)`|<img src="Demo/Ref/ReferenceImages_64/DemoTests.EasingDemoTests/test_piecewiseLinear_spring_@3x.png" width="100"/>|
+|`.spring(.swiftUISpring)`|<img src="Demo/Ref/ReferenceImages_64/DemoTests.EasingDemoTests/test_spring__swiftUISpring_@3x.png" width="100"/>|
+|`.spring(.swiftUIInteractiveSpring)`|<img src="Demo/Ref/ReferenceImages_64/DemoTests.EasingDemoTests/test_spring__swiftUIInteractiveSpring_@3x.png" width="100"/>|
+|`.spring(dampingRatio:0.7,response:0.4)`|<img src="Demo/Ref/ReferenceImages_64/DemoTests.EasingDemoTests/test_spring_dampingRatio_0_7_response_0_4_@3x.png" width="100"/>|
+|`.spring(response:0.5,dampingFraction:0.825)`|<img src="Demo/Ref/ReferenceImages_64/DemoTests.EasingDemoTests/test_spring_response_0_5_dampingFraction_0_825_@3x.png" width="100"/>|
+|`.spring(mass:1,stiffness:100,damping:10,duration:1)`|<img src="Demo/Ref/ReferenceImages_64/DemoTests.EasingDemoTests/test_spring_mass_1_stiffness_100_damping_10_duration_1_@3x.png" width="100"/>|
 |`.smoothStep`|<img src="Demo/Ref/ReferenceImages_64/DemoTests.EasingDemoTests/test_smoothStep@3x.png" width="100"/>|
 |`.smootherStep`|<img src="Demo/Ref/ReferenceImages_64/DemoTests.EasingDemoTests/test_smootherStep@3x.png" width="100"/>|
 |`.quadraticEaseIn`|<img src="Demo/Ref/ReferenceImages_64/DemoTests.EasingDemoTests/test_quadraticEaseIn@3x.png" width="100"/>|

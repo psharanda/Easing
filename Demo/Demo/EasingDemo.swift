@@ -66,6 +66,32 @@ struct EasingDemoItem {
                 PiecewiseLinearStop(0.99996),
             ])
         ),
+        EasingDemoItem(
+            name: "spring(.swiftUISpring)",
+            easing: .spring(.swiftUISpring, initialVelocity: 0)
+        ),
+        EasingDemoItem(
+            name: "spring(.swiftUIInteractiveSpring)",
+            easing: .spring(.swiftUIInteractiveSpring, initialVelocity: 0)
+        ),
+        EasingDemoItem(
+            name: "spring(dampingRatio:0.7,response:0.4)",
+            easing: .spring(dampingRatio: 0.7, response: 0.4, initialVelocity: 0)
+        ),
+        EasingDemoItem(
+            name: "spring(response:0.5,dampingFraction:0.825)",
+            easing: .spring(response: 0.5, dampingFraction: 0.825, initialVelocity: 0)
+        ),
+        EasingDemoItem(
+            name: "spring(mass:1,stiffness:100,damping:10,duration:1)",
+            easing: .spring(
+                mass: 1,
+                stiffness: 100,
+                damping: 10,
+                initialVelocity: 0,
+                duration: 1
+            )
+        ),
 
         EasingDemoItem(name: "smoothStep", easing: .smoothStep),
         EasingDemoItem(name: "smootherStep", easing: .smootherStep),
@@ -117,5 +143,3 @@ struct EasingDemoItem {
         EasingDemoItem(name: "cubicBezier(0.11, 0.87, 0.21,-0.88)", easing: .cubicBezier(0.11, 0.87, 0.21, -0.88)),
     ]
 }
-
-
