@@ -14,7 +14,7 @@ final class EasingDemoTests: FBSnapshotTestCase {
     }
     
     func test() {
-        //recordMode = true
+        // recordMode = true
         
         for item in EasingDemoItem.allItems {
             let view = EasingChartView()
