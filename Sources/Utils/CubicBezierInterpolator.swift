@@ -35,7 +35,7 @@ struct CubicBezierCalculator {
     }
 
     private func calculateT(_ x: Double) -> Double {
-        let stepSize = 1.0 / Double(sampleValues.count)
+        let stepSize = 1.0 / Double(sampleValues.count - 1)
 
         // Find interval where t lies
         var intervalStart = 0.0
