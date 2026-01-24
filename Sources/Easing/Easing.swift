@@ -14,56 +14,12 @@ public struct PiecewiseLinearStop {
     }
 }
 
-public enum Easing {
-    case linear
-    case piecewiseLinear([PiecewiseLinearStop])
+public struct Easing {
+    private let easingFunction: (Double) -> Double
 
-    case smoothStep
-    case smootherStep
-
-    case quadraticEaseIn
-    case quadraticEaseOut
-    case quadraticEaseInOut
-
-    case cubicEaseIn
-    case cubicEaseOut
-    case cubicEaseInOut
-
-    case quarticEaseIn
-    case quarticEaseOut
-    case quarticEaseInOut
-
-    case quinticEaseIn
-    case quinticEaseOut
-    case quinticEaseInOut
-
-    case sineEaseIn
-    case sineEaseOut
-    case sineEaseInOut
-
-    case circularEaseIn
-    case circularEaseOut
-    case circularEaseInOut
-
-    case exponentialEaseIn
-    case exponentialEaseOut
-    case exponentialEaseInOut
-
-    case elasticEaseIn
-    case elasticEaseOut
-    case elasticEaseInOut
-
-    case backEaseIn
-    case backEaseOut
-    case backEaseInOut
-
-    case bounceEaseIn
-    case bounceEaseOut
-    case bounceEaseInOut
-
-    case cubicBezier(Double, Double, Double, Double)
-
-    case custom((Double) -> Double)
+    private init(_ easingFunction: @escaping (Double) -> Double) {
+        self.easingFunction = easingFunction
+    }
 
     /**
       Calculate d value for g, where g1 = 0, d1 = 0, g2 = 1, d2 = 1
@@ -99,86 +55,67 @@ public enum Easing {
         return d1 + resT * (d2 - d1)
     }
 
-    private var easingFunction: (Double) -> Double {
-        switch self {
-        case .linear:
-            return Easing._linear
-        case let .piecewiseLinear(stops):
-            let resolvedStops = Easing._resolvePiecewiseLinearStops(stops)
-            return { (p: Double) -> Double in
-                Easing._piecewiseLinear(p, stops: resolvedStops)
-            }
-        case .smoothStep:
-            return Easing._smoothStep
-        case .smootherStep:
-            return Easing._smootherStep
-        case .quadraticEaseIn:
-            return Easing._quadraticEaseIn
-        case .quadraticEaseOut:
-            return Easing._quadraticEaseOut
-        case .quadraticEaseInOut:
-            return Easing._quadraticEaseInOut
-        case .cubicEaseIn:
-            return Easing._cubicEaseIn
-        case .cubicEaseOut:
-            return Easing._cubicEaseOut
-        case .cubicEaseInOut:
-            return Easing._cubicEaseInOut
-        case .quarticEaseIn:
-            return Easing._quarticEaseIn
-        case .quarticEaseOut:
-            return Easing._quarticEaseOut
-        case .quarticEaseInOut:
-            return Easing._quarticEaseInOut
-        case .quinticEaseIn:
-            return Easing._quinticEaseIn
-        case .quinticEaseOut:
-            return Easing._quinticEaseOut
-        case .quinticEaseInOut:
-            return Easing._quinticEaseInOut
-        case .sineEaseIn:
-            return Easing._sineEaseIn
-        case .sineEaseOut:
-            return Easing._sineEaseOut
-        case .sineEaseInOut:
-            return Easing._sineEaseInOut
-        case .circularEaseIn:
-            return Easing._circularEaseIn
-        case .circularEaseOut:
-            return Easing._circularEaseOut
-        case .circularEaseInOut:
-            return Easing._circularEaseInOut
-        case .exponentialEaseIn:
-            return Easing._exponentialEaseIn
-        case .exponentialEaseOut:
-            return Easing._exponentialEaseOut
-        case .exponentialEaseInOut:
-            return Easing._exponentialEaseInOut
-        case .elasticEaseIn:
-            return Easing._elasticEaseIn
-        case .elasticEaseOut:
-            return Easing._elasticEaseOut
-        case .elasticEaseInOut:
-            return Easing._elasticEaseInOut
-        case .backEaseIn:
-            return Easing._backEaseIn
-        case .backEaseOut:
-            return Easing._backEaseOut
-        case .backEaseInOut:
-            return Easing._backEaseInOut
-        case .bounceEaseIn:
-            return Easing._bounceEaseIn
-        case .bounceEaseOut:
-            return Easing._bounceEaseOut
-        case .bounceEaseInOut:
-            return Easing._bounceEaseInOut
-        case let .cubicBezier(x1, y1, x2, y2):
-            return { (p: Double) -> Double in
-                Easing._cubicBezier(p, x1: x1, y1: y1, x2: x2, y2: y2)
-            }
-        case let .custom(f):
-            return f
+    public static let linear = Easing(Easing._linear)
+
+    public static func piecewiseLinear(_ stops: [PiecewiseLinearStop]) -> Easing {
+        let resolvedStops = Easing._resolvePiecewiseLinearStops(stops)
+        return Easing { p in
+            Easing._piecewiseLinear(p, stops: resolvedStops)
         }
+    }
+
+    public static let smoothStep = Easing(Easing._smoothStep)
+    public static let smootherStep = Easing(Easing._smootherStep)
+
+    public static let quadraticEaseIn = Easing(Easing._quadraticEaseIn)
+    public static let quadraticEaseOut = Easing(Easing._quadraticEaseOut)
+    public static let quadraticEaseInOut = Easing(Easing._quadraticEaseInOut)
+
+    public static let cubicEaseIn = Easing(Easing._cubicEaseIn)
+    public static let cubicEaseOut = Easing(Easing._cubicEaseOut)
+    public static let cubicEaseInOut = Easing(Easing._cubicEaseInOut)
+
+    public static let quarticEaseIn = Easing(Easing._quarticEaseIn)
+    public static let quarticEaseOut = Easing(Easing._quarticEaseOut)
+    public static let quarticEaseInOut = Easing(Easing._quarticEaseInOut)
+
+    public static let quinticEaseIn = Easing(Easing._quinticEaseIn)
+    public static let quinticEaseOut = Easing(Easing._quinticEaseOut)
+    public static let quinticEaseInOut = Easing(Easing._quinticEaseInOut)
+
+    public static let sineEaseIn = Easing(Easing._sineEaseIn)
+    public static let sineEaseOut = Easing(Easing._sineEaseOut)
+    public static let sineEaseInOut = Easing(Easing._sineEaseInOut)
+
+    public static let circularEaseIn = Easing(Easing._circularEaseIn)
+    public static let circularEaseOut = Easing(Easing._circularEaseOut)
+    public static let circularEaseInOut = Easing(Easing._circularEaseInOut)
+
+    public static let exponentialEaseIn = Easing(Easing._exponentialEaseIn)
+    public static let exponentialEaseOut = Easing(Easing._exponentialEaseOut)
+    public static let exponentialEaseInOut = Easing(Easing._exponentialEaseInOut)
+
+    public static let elasticEaseIn = Easing(Easing._elasticEaseIn)
+    public static let elasticEaseOut = Easing(Easing._elasticEaseOut)
+    public static let elasticEaseInOut = Easing(Easing._elasticEaseInOut)
+
+    public static let backEaseIn = Easing(Easing._backEaseIn)
+    public static let backEaseOut = Easing(Easing._backEaseOut)
+    public static let backEaseInOut = Easing(Easing._backEaseInOut)
+
+    public static let bounceEaseIn = Easing(Easing._bounceEaseIn)
+    public static let bounceEaseOut = Easing(Easing._bounceEaseOut)
+    public static let bounceEaseInOut = Easing(Easing._bounceEaseInOut)
+
+    public static func cubicBezier(_ x1: Double, _ y1: Double, _ x2: Double, _ y2: Double) -> Easing {
+        let calculator = CubicBezierCalculator(x1: x1, y1: y1, x2: x2, y2: y2)
+        return Easing { p in
+            calculator.calculate(p)
+        }
+    }
+
+    public static func custom(_ f: @escaping (Double) -> Double) -> Easing {
+        return Easing(f)
     }
 
     //  Based on https://github.com/warrenm/AHEasing and https://github.com/ai/easings.net
@@ -518,11 +455,5 @@ public enum Easing {
         } else {
             return 0.5 * _bounceEaseOut(p * 2 - 1) + 0.5
         }
-    }
-
-    private static func _cubicBezier(_ p: Double, x1: Double, y1: Double, x2: Double, y2: Double)
-        -> Double
-    {
-        return CubicBezierCalculator(x1: x1, y1: y1, x2: x2, y2: y2).calculate(p)
     }
 }
