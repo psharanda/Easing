@@ -5,11 +5,19 @@
 import Foundation
 
 public extension Easing {
+    /// Preset spring configurations that mirror SwiftUI defaults.
     enum SpringPreset {
+        /// SwiftUI `.spring` preset (response: 0.5, dampingFraction: 0.825).
         case swiftUISpring
+        /// SwiftUI `.interactiveSpring` preset (response: 0.15, dampingFraction: 0.86).
         case swiftUIInteractiveSpring
     }
 
+    /// Creates a spring easing using a preset configuration.
+    /// - Parameters:
+    ///   - preset: Preset spring configuration.
+    ///   - initialVelocity: Initial velocity in units per second.
+    ///   - overshootClamping: When true, clamps the output to 0...1.
     static func spring(
         _ preset: SpringPreset,
         initialVelocity: Double,
@@ -33,6 +41,12 @@ public extension Easing {
         }
     }
 
+    /// Creates a spring easing from damping ratio and response.
+    /// - Parameters:
+    ///   - dampingRatio: Damping ratio (ζ).
+    ///   - response: Approximate response duration in seconds.
+    ///   - initialVelocity: Initial velocity in units per second.
+    ///   - overshootClamping: When true, clamps the output to 0...1.
     static func spring(
         dampingRatio: Double,
         response: Double,
@@ -47,6 +61,12 @@ public extension Easing {
         )
     }
 
+    /// Creates a spring easing from SwiftUI-style response and damping fraction.
+    /// - Parameters:
+    ///   - response: Approximate response duration in seconds.
+    ///   - dampingFraction: Damping fraction (ζ).
+    ///   - initialVelocity: Initial velocity in units per second.
+    ///   - overshootClamping: When true, clamps the output to 0...1.
     static func spring(
         response: Double,
         dampingFraction: Double,
@@ -67,6 +87,14 @@ public extension Easing {
         )
     }
 
+    /// Creates a spring easing from physics parameters.
+    /// - Parameters:
+    ///   - mass: Mass of the spring system.
+    ///   - stiffness: Spring stiffness.
+    ///   - damping: Damping coefficient.
+    ///   - initialVelocity: Initial velocity in units per second.
+    ///   - duration: Duration to normalize the curve over.
+    ///   - overshootClamping: When true, clamps the output to 0...1.
     static func spring(
         mass: Double,
         stiffness: Double,

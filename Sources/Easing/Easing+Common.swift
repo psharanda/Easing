@@ -5,51 +5,86 @@
 import Foundation
 
 public extension Easing {
+    /// Easing curve: `linear`.
     static let linear = Easing(Easing._linear)
 
+    /// Easing curve: `smoothStep`.
     static let smoothStep = Easing(Easing._smoothStep)
+    /// Easing curve: `smootherStep`.
     static let smootherStep = Easing(Easing._smootherStep)
 
+    /// Easing curve: `quadraticEaseIn`.
     static let quadraticEaseIn = Easing(Easing._quadraticEaseIn)
+    /// Easing curve: `quadraticEaseOut`.
     static let quadraticEaseOut = Easing(Easing._quadraticEaseOut)
+    /// Easing curve: `quadraticEaseInOut`.
     static let quadraticEaseInOut = Easing(Easing._quadraticEaseInOut)
 
+    /// Easing curve: `cubicEaseIn`.
     static let cubicEaseIn = Easing(Easing._cubicEaseIn)
+    /// Easing curve: `cubicEaseOut`.
     static let cubicEaseOut = Easing(Easing._cubicEaseOut)
+    /// Easing curve: `cubicEaseInOut`.
     static let cubicEaseInOut = Easing(Easing._cubicEaseInOut)
 
+    /// Easing curve: `quarticEaseIn`.
     static let quarticEaseIn = Easing(Easing._quarticEaseIn)
+    /// Easing curve: `quarticEaseOut`.
     static let quarticEaseOut = Easing(Easing._quarticEaseOut)
+    /// Easing curve: `quarticEaseInOut`.
     static let quarticEaseInOut = Easing(Easing._quarticEaseInOut)
 
+    /// Easing curve: `quinticEaseIn`.
     static let quinticEaseIn = Easing(Easing._quinticEaseIn)
+    /// Easing curve: `quinticEaseOut`.
     static let quinticEaseOut = Easing(Easing._quinticEaseOut)
+    /// Easing curve: `quinticEaseInOut`.
     static let quinticEaseInOut = Easing(Easing._quinticEaseInOut)
 
+    /// Easing curve: `sineEaseIn`.
     static let sineEaseIn = Easing(Easing._sineEaseIn)
+    /// Easing curve: `sineEaseOut`.
     static let sineEaseOut = Easing(Easing._sineEaseOut)
+    /// Easing curve: `sineEaseInOut`.
     static let sineEaseInOut = Easing(Easing._sineEaseInOut)
 
+    /// Easing curve: `circularEaseIn`.
     static let circularEaseIn = Easing(Easing._circularEaseIn)
+    /// Easing curve: `circularEaseOut`.
     static let circularEaseOut = Easing(Easing._circularEaseOut)
+    /// Easing curve: `circularEaseInOut`.
     static let circularEaseInOut = Easing(Easing._circularEaseInOut)
 
+    /// Easing curve: `exponentialEaseIn`.
     static let exponentialEaseIn = Easing(Easing._exponentialEaseIn)
+    /// Easing curve: `exponentialEaseOut`.
     static let exponentialEaseOut = Easing(Easing._exponentialEaseOut)
+    /// Easing curve: `exponentialEaseInOut`.
     static let exponentialEaseInOut = Easing(Easing._exponentialEaseInOut)
 
+    /// Easing curve: `elasticEaseIn`.
     static let elasticEaseIn = Easing(Easing._elasticEaseIn)
+    /// Easing curve: `elasticEaseOut`.
     static let elasticEaseOut = Easing(Easing._elasticEaseOut)
+    /// Easing curve: `elasticEaseInOut`.
     static let elasticEaseInOut = Easing(Easing._elasticEaseInOut)
 
+    /// Easing curve: `backEaseIn`.
     static let backEaseIn = Easing(Easing._backEaseIn)
+    /// Easing curve: `backEaseOut`.
     static let backEaseOut = Easing(Easing._backEaseOut)
+    /// Easing curve: `backEaseInOut`.
     static let backEaseInOut = Easing(Easing._backEaseInOut)
 
+    /// Easing curve: `bounceEaseIn`.
     static let bounceEaseIn = Easing(Easing._bounceEaseIn)
+    /// Easing curve: `bounceEaseOut`.
     static let bounceEaseOut = Easing(Easing._bounceEaseOut)
+    /// Easing curve: `bounceEaseInOut`.
     static let bounceEaseInOut = Easing(Easing._bounceEaseInOut)
 
+    /// Creates a custom easing from a normalized progress function.
+    /// - Parameter f: Function that maps progress in 0...1 to an output value.
     static func custom(_ f: @escaping (Double) -> Double) -> Easing {
         return Easing(f)
     }

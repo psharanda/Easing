@@ -76,6 +76,7 @@ extension UIColor: Interpolatable {
         return (h2, s2, b2, alpha)
     }
 
+    /// Interpolates between colors in HSB space.
     public func interpolateHSB(to: UIColor, progress: Double, easing: Easing) -> Self {
         let (h1, s1, b1, a1) = hsbComponents()
         let (h2, s2, b2, a2) = to.hsbComponents()
@@ -88,6 +89,7 @@ extension UIColor: Interpolatable {
         )
     }
 
+    /// Interpolates between colors in RGB space.
     public func interpolate(to: UIColor, progress: Double, easing: Easing) -> Self {
         let (r1, g1, b1, a1) = rgbaComponents()
         let (r2, g2, b2, a2) = to.rgbaComponents()

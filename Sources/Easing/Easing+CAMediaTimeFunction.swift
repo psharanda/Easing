@@ -7,16 +7,19 @@
 import QuartzCore
 
 public extension Easing {
+    /// Core Animation ease-in timing function as an easing curve.
     static let caEaseIn: Easing = {
         let f = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeIn)
         return Easing.cubicBezierEasingForMediaFunction(f)
     }()
 
+    /// Core Animation ease-out timing function as an easing curve.
     static let caEaseOut: Easing = {
         let f = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
         return Easing.cubicBezierEasingForMediaFunction(f)
     }()
 
+    /// Core Animation ease-in-ease-out timing function as an easing curve.
     static let caEaseInEaseOut: Easing = {
         let f = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         return Easing.cubicBezierEasingForMediaFunction(f)

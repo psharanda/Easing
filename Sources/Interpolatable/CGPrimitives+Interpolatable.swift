@@ -6,12 +6,14 @@ import CoreGraphics
 import Foundation
 
 extension CGFloat: Interpolatable {
+    /// Interpolates between two scalar values.
     public func interpolate(to: CGFloat, progress: Double, easing: Easing) -> Self {
         return easing.calculate(d1: self, d2: to, g: progress)
     }
 }
 
 extension CGPoint: Interpolatable {
+    /// Interpolates between two points component-wise.
     public func interpolate(to: CGPoint, progress: Double, easing: Easing) -> Self {
         return CGPoint(
             x: x.interpolate(to: to.x, progress: progress, easing: easing),
@@ -21,6 +23,7 @@ extension CGPoint: Interpolatable {
 }
 
 extension CGRect: Interpolatable {
+    /// Interpolates between two rectangles component-wise.
     public func interpolate(to: CGRect, progress: Double, easing: Easing) -> Self {
         return CGRect(
             x: origin.x.interpolate(to: to.origin.x, progress: progress, easing: easing),
@@ -32,6 +35,7 @@ extension CGRect: Interpolatable {
 }
 
 extension CGSize: Interpolatable {
+    /// Interpolates between two sizes component-wise.
     public func interpolate(to: CGSize, progress: Double, easing: Easing) -> Self {
         return CGSize(
             width: width.interpolate(to: to.width, progress: progress, easing: easing),
@@ -41,6 +45,7 @@ extension CGSize: Interpolatable {
 }
 
 extension CGAffineTransform: Interpolatable {
+    /// Interpolates between two affine transforms by decomposing into translation, scale, and rotation.
     public func interpolate(to: CGAffineTransform, progress: Double, easing: Easing) -> Self {
         return CGAffineTransform(tx: tx.interpolate(to: to.tx, progress: progress, easing: easing),
                                  ty: ty.interpolate(to: to.ty, progress: progress, easing: easing),

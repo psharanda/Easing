@@ -5,6 +5,12 @@
 import Foundation
 
 public extension Easing {
+    /// Creates an easing from cubic bezier control points.
+    /// - Parameters:
+    ///   - x1: X of control point 1.
+    ///   - y1: Y of control point 1.
+    ///   - x2: X of control point 2.
+    ///   - y2: Y of control point 2.
     static func cubicBezier(_ x1: Double, _ y1: Double, _ x2: Double, _ y2: Double) -> Easing {
         let calculator = CubicBezierCalculator(x1: x1, y1: y1, x2: x2, y2: y2)
         return Easing { p in

@@ -8,6 +8,7 @@ import Foundation
 import UIKit
 
 extension UIBezierPath: Interpolatable {
+    /// Interpolates between two paths with matching element types and counts.
     public func interpolate(to: UIBezierPath, progress: Double, easing: Easing) -> Self {
         let pathElements1 = cgPath.pathElements()
         let pathElements2 = to.cgPath.pathElements()

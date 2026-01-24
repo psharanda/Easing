@@ -4,10 +4,17 @@
 
 import Foundation
 
+/// A stop for a piecewise linear easing, similar to CSS `linear()` stops.
 public struct PiecewiseLinearStop {
+    /// Optional input position (in the 0...1 range when omitted).
     public var x: Double?
+    /// Output value at this stop.
     public var y: Double
 
+    /// Creates a stop with an optional input position.
+    /// - Parameters:
+    ///   - y: Output value at the stop.
+    ///   - x: Optional input position. If omitted, positions are inferred.
     public init(_ y: Double, at x: Double? = nil) {
         self.y = y
         self.x = x
@@ -15,6 +22,8 @@ public struct PiecewiseLinearStop {
 }
 
 public extension Easing {
+    /// Creates a piecewise linear easing using CSS `linear()`-style stops.
+    /// - Parameter stops: Stop list, with optional input positions.
     static func piecewiseLinear(_ stops: [PiecewiseLinearStop]) -> Easing {
         let resolvedStops = PiecewiseLinearSolver.resolveStops(stops)
         return Easing { p in
