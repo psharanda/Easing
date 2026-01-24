@@ -21,11 +21,6 @@ public struct Easing {
         self.easingFunction = easingFunction
     }
 
-    public enum SpringPreset {
-        case swiftUISpring
-        case swiftUIInteractiveSpring
-    }
-
     /**
       Calculate d value for g, where g1 = 0, d1 = 0, g2 = 1, d2 = 1
      */
@@ -63,9 +58,9 @@ public struct Easing {
     public static let linear = Easing(Easing._linear)
 
     public static func piecewiseLinear(_ stops: [PiecewiseLinearStop]) -> Easing {
-        let resolvedStops = Easing._resolvePiecewiseLinearStops(stops)
+        let resolvedStops = PiecewiseLinearSolver.resolveStops(stops)
         return Easing { p in
-            Easing._piecewiseLinear(p, stops: resolvedStops)
+            PiecewiseLinearSolver.evaluate(p, stops: resolvedStops)
         }
     }
 
@@ -112,6 +107,11 @@ public struct Easing {
     public static let bounceEaseOut = Easing(Easing._bounceEaseOut)
     public static let bounceEaseInOut = Easing(Easing._bounceEaseInOut)
 
+    public enum SpringPreset {
+        case swiftUISpring
+        case swiftUIInteractiveSpring
+    }
+    
     public static func spring(
         _ preset: SpringPreset,
         initialVelocity: Double,
@@ -178,8 +178,8 @@ public struct Easing {
         overshootClamping: Bool = false
     ) -> Easing {
         return Easing { p in
-            Easing._spring(
-                p,
+            SpringSolver.normalizedValue(
+                progress: p,
                 mass: mass,
                 stiffness: stiffness,
                 damping: damping,
@@ -208,105 +208,6 @@ public struct Easing {
         return p
     }
 
-    private static func _resolvePiecewiseLinearStops(_ stops: [PiecewiseLinearStop]) -> [(x: Double, y: Double)] {
-        guard !stops.isEmpty else {
-            return []
-        }
-
-        if stops.count == 1 {
-            return [(x: stops[0].x ?? 0, y: stops[0].y)]
-        }
-
-        var xs = Array(repeating: Double.nan, count: stops.count)
-        let ys = stops.map { $0.y }
-
-        for (idx, stop) in stops.enumerated() {
-            if let x = stop.x {
-                xs[idx] = x
-            }
-        }
-
-        let explicitIndices = xs.indices.filter { !xs[$0].isNaN }
-
-        if explicitIndices.isEmpty {
-            let step = 1.0 / Double(stops.count - 1)
-            for i in 0 ..< xs.count {
-                xs[i] = Double(i) * step
-            }
-        } else {
-            let first = explicitIndices.first!
-            let firstX = xs[first]
-            if first > 0 {
-                let step = (firstX - 0.0) / Double(first)
-                for i in 0 ..< first {
-                    xs[i] = Double(i) * step
-                }
-            }
-
-            for (left, right) in zip(explicitIndices, explicitIndices.dropFirst()) {
-                let gap = right - left
-                if gap > 1 {
-                    let leftX = xs[left]
-                    let rightX = xs[right]
-                    let step = (rightX - leftX) / Double(gap)
-                    for i in 1 ..< gap {
-                        xs[left + i] = leftX + step * Double(i)
-                    }
-                }
-            }
-
-            let last = explicitIndices.last!
-            let lastX = xs[last]
-            if last < xs.count - 1 {
-                let remaining = xs.count - 1 - last
-                let step = (1.0 - lastX) / Double(remaining)
-                for i in 1 ... remaining {
-                    xs[last + i] = lastX + step * Double(i)
-                }
-            }
-        }
-
-        let indexed = zip(xs, ys).enumerated().map { (index: $0.offset, x: $0.element.0, y: $0.element.1) }
-        let sorted = indexed.sorted { lhs, rhs in
-            if lhs.x == rhs.x {
-                return lhs.index < rhs.index
-            }
-            return lhs.x < rhs.x
-        }
-        return sorted.map { (x: $0.x, y: $0.y) }
-    }
-
-    private static func _piecewiseLinear(_ p: Double, stops: [(x: Double, y: Double)]) -> Double {
-        guard !stops.isEmpty else {
-            return p
-        }
-
-        if stops.count == 1 {
-            return stops[0].y
-        }
-
-        if p <= stops[0].x {
-            return stops[0].y
-        }
-        if p >= stops[stops.count - 1].x {
-            return stops[stops.count - 1].y
-        }
-
-        for i in 1 ..< stops.count {
-            let prev = stops[i - 1]
-            let next = stops[i]
-            if p <= next.x {
-                let span = next.x - prev.x
-                if span == 0 {
-                    return next.y
-                }
-                let t = (p - prev.x) / span
-                return prev.y + t * (next.y - prev.y)
-            }
-        }
-
-        return stops[stops.count - 1].y
-    }
 
     // fast but ugly easeInOut
     private static func _smoothStep(_ p: Double) -> Double {
@@ -540,72 +441,4 @@ public struct Easing {
         }
     }
 
-    private static func _spring(
-        _ p: Double,
-        mass: Double,
-        stiffness: Double,
-        damping: Double,
-        initialVelocity: Double,
-        duration: Double,
-        overshootClamping: Bool
-    ) -> Double {
-        if duration <= 0 || mass <= 0 || stiffness <= 0 {
-            return p
-        }
-
-        let t = p * duration
-        let value = _springValue(
-            t,
-            mass: mass,
-            stiffness: stiffness,
-            damping: damping,
-            initialVelocity: initialVelocity
-        )
-        let endValue = _springValue(
-            duration,
-            mass: mass,
-            stiffness: stiffness,
-            damping: damping,
-            initialVelocity: initialVelocity
-        )
-
-        var normalized = endValue == 0 ? value : (value / endValue)
-        if overshootClamping {
-            normalized = min(1, max(0, normalized))
-        }
-        return normalized
-    }
-
-    private static func _springValue(
-        _ t: Double,
-        mass: Double,
-        stiffness: Double,
-        damping: Double,
-        initialVelocity: Double
-    ) -> Double {
-        let angularFrequency = sqrt(stiffness / mass)
-        let dampingRatio = damping / (2 * sqrt(stiffness * mass))
-        let epsilon = 1e-6
-
-        if dampingRatio < 1 - epsilon {
-            let dampingFrequency = angularFrequency * sqrt(1 - dampingRatio * dampingRatio)
-            let expTerm = exp(-dampingRatio * angularFrequency * t)
-            let b = (initialVelocity - dampingRatio * angularFrequency) / dampingFrequency
-            let x = expTerm * (-cos(dampingFrequency * t) + b * sin(dampingFrequency * t))
-            return 1 + x
-        } else if abs(dampingRatio - 1) <= epsilon {
-            let expTerm = exp(-angularFrequency * t)
-            let b = initialVelocity - angularFrequency
-            let x = (-1 + b * t) * expTerm
-            return 1 + x
-        } else {
-            let z = sqrt(dampingRatio * dampingRatio - 1)
-            let r1 = -angularFrequency * (dampingRatio - z)
-            let r2 = -angularFrequency * (dampingRatio + z)
-            let c1 = (initialVelocity + r2) / (r1 - r2)
-            let c2 = -1 - c1
-            let x = c1 * exp(r1 * t) + c2 * exp(r2 * t)
-            return 1 + x
-        }
-    }
 }

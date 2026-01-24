@@ -28,6 +28,8 @@
 		1B2724272C15CB2700EE2AFB /* DemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2724262C15CB2700EE2AFB /* DemoTests.swift */; };
 		1B27242F2C15CB9D00EE2AFB /* iOSSnapshotTestCase in Frameworks */ = {isa = PBXBuildFile; productRef = 1B27242E2C15CB9D00EE2AFB /* iOSSnapshotTestCase */; };
 		1B2724312C15CBDB00EE2AFB /* EasingDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2724302C15CBDB00EE2AFB /* EasingDemo.swift */; };
+		1B360D2D2F2551AA00001B2C /* PiecewiseLinearSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B360D2B2F2551AA00001B2C /* PiecewiseLinearSolver.swift */; };
+		1B360D2E2F2551AA00001B2C /* SpringSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B360D2C2F2551AA00001B2C /* SpringSolver.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +65,8 @@
 		1B2724242C15CB2700EE2AFB /* DemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B2724262C15CB2700EE2AFB /* DemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoTests.swift; sourceTree = "<group>"; };
 		1B2724302C15CBDB00EE2AFB /* EasingDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasingDemo.swift; sourceTree = "<group>"; };
+		1B360D2B2F2551AA00001B2C /* PiecewiseLinearSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PiecewiseLinearSolver.swift; sourceTree = "<group>"; };
+		1B360D2C2F2551AA00001B2C /* SpringSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpringSolver.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +149,8 @@
 		1B27240A2C14740C00EE2AFB /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				1B360D2B2F2551AA00001B2C /* PiecewiseLinearSolver.swift */,
+				1B360D2C2F2551AA00001B2C /* SpringSolver.swift */,
 				1B2724082C14740C00EE2AFB /* CGPath+PathElements.swift */,
 				1B2724092C14740C00EE2AFB /* CubicBezierInterpolator.swift */,
 			);
@@ -286,6 +292,8 @@
 				1B27240D2C14740C00EE2AFB /* Easing+CAMediaTimeFunction.swift in Sources */,
 				1B2724132C14740C00EE2AFB /* CubicBezierInterpolator.swift in Sources */,
 				1B2724102C14740C00EE2AFB /* UIBezierPath+Interpolatable.swift in Sources */,
+				1B360D2D2F2551AA00001B2C /* PiecewiseLinearSolver.swift in Sources */,
+				1B360D2E2F2551AA00001B2C /* SpringSolver.swift in Sources */,
 				1B2723ED2C1473DC00EE2AFB /* AppDelegate.swift in Sources */,
 				1B2724312C15CBDB00EE2AFB /* EasingDemo.swift in Sources */,
 				1B27240E2C14740C00EE2AFB /* CGPrimitives+Interpolatable.swift in Sources */,
