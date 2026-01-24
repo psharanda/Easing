@@ -4,8 +4,19 @@
 
 import Foundation
 
+public struct PiecewiseLinearStop {
+    public var x: Double?
+    public var y: Double
+
+    public init(_ y: Double, at x: Double? = nil) {
+        self.y = y
+        self.x = x
+    }
+}
+
 public enum Easing {
     case linear
+    case piecewiseLinear([PiecewiseLinearStop])
 
     case smoothStep
     case smootherStep
@@ -92,6 +103,11 @@ public enum Easing {
         switch self {
         case .linear:
             return Easing._linear
+        case let .piecewiseLinear(stops):
+            let resolvedStops = Easing._resolvePiecewiseLinearStops(stops)
+            return { (p: Double) -> Double in
+                Easing._piecewiseLinear(p, stops: resolvedStops)
+            }
         case .smoothStep:
             return Easing._smoothStep
         case .smootherStep:
@@ -170,6 +186,106 @@ public enum Easing {
     // Modeled after the line y = x
     private static func _linear(_ p: Double) -> Double {
         return p
+    }
+
+    private static func _resolvePiecewiseLinearStops(_ stops: [PiecewiseLinearStop]) -> [(x: Double, y: Double)] {
+        guard !stops.isEmpty else {
+            return []
+        }
+
+        if stops.count == 1 {
+            return [(x: stops[0].x ?? 0, y: stops[0].y)]
+        }
+
+        var xs = Array(repeating: Double.nan, count: stops.count)
+        let ys = stops.map { $0.y }
+
+        for (idx, stop) in stops.enumerated() {
+            if let x = stop.x {
+                xs[idx] = x
+            }
+        }
+
+        let explicitIndices = xs.indices.filter { !xs[$0].isNaN }
+
+        if explicitIndices.isEmpty {
+            let step = 1.0 / Double(stops.count - 1)
+            for i in 0 ..< xs.count {
+                xs[i] = Double(i) * step
+            }
+        } else {
+            let first = explicitIndices.first!
+            let firstX = xs[first]
+            if first > 0 {
+                let step = (firstX - 0.0) / Double(first)
+                for i in 0 ..< first {
+                    xs[i] = Double(i) * step
+                }
+            }
+
+            for (left, right) in zip(explicitIndices, explicitIndices.dropFirst()) {
+                let gap = right - left
+                if gap > 1 {
+                    let leftX = xs[left]
+                    let rightX = xs[right]
+                    let step = (rightX - leftX) / Double(gap)
+                    for i in 1 ..< gap {
+                        xs[left + i] = leftX + step * Double(i)
+                    }
+                }
+            }
+
+            let last = explicitIndices.last!
+            let lastX = xs[last]
+            if last < xs.count - 1 {
+                let remaining = xs.count - 1 - last
+                let step = (1.0 - lastX) / Double(remaining)
+                for i in 1 ... remaining {
+                    xs[last + i] = lastX + step * Double(i)
+                }
+            }
+        }
+
+        let indexed = zip(xs, ys).enumerated().map { (index: $0.offset, x: $0.element.0, y: $0.element.1) }
+        let sorted = indexed.sorted { lhs, rhs in
+            if lhs.x == rhs.x {
+                return lhs.index < rhs.index
+            }
+            return lhs.x < rhs.x
+        }
+        return sorted.map { (x: $0.x, y: $0.y) }
+    }
+
+    private static func _piecewiseLinear(_ p: Double, stops: [(x: Double, y: Double)]) -> Double {
+        guard !stops.isEmpty else {
+            return p
+        }
+
+        if stops.count == 1 {
+            return stops[0].y
+        }
+
+        if p <= stops[0].x {
+            return stops[0].y
+        }
+        if p >= stops[stops.count - 1].x {
+            return stops[stops.count - 1].y
+        }
+
+        for i in 1 ..< stops.count {
+            let prev = stops[i - 1]
+            let next = stops[i]
+            if p <= next.x {
+                let span = next.x - prev.x
+                if span == 0 {
+                    return next.y
+                }
+                let t = (p - prev.x) / span
+                return prev.y + t * (next.y - prev.y)
+            }
+        }
+
+        return stops[stops.count - 1].y
     }
 
     // fast but ugly easeInOut

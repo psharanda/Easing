@@ -9,6 +9,7 @@ The Easing library is a comprehensive set of easing functions, useful for intera
 - Easy-to-use 'swifty' API to invoke calculations
 - Interpolation shorthands for commonly used types like `CGPoint`, `CGSize`, `CGTransform`, `UIColor` and `UIBezierPath`
 - Arbitrary cubic bezier based easings (see `.cubicBezier(...)`)
+- Piecewise linear easings with optional stop positions (CSS `linear()` style)
 - Emulate default easings from iOS (see `.caEaseIn`, `.caEaseOut`, `.caEaseInEaseOut`)
 - Interactive demo app
 - Supports iOS 12.0+ / Mac OS X 10.13+ / tvOS 12.0+ / watchOS 4.0+ / visionOS 1.0+
@@ -63,11 +64,25 @@ view.transform = startTransform.interpolate(to: endTransform,
 
 ````
 
+### Piecewise linear (CSS `linear()` style)
+
+````swift
+let easing = Easing.piecewiseLinear([
+    PiecewiseLinearStop(0),            // x defaults to 0
+    PiecewiseLinearStop(1, at: 0.6),   // explicit stop position
+    PiecewiseLinearStop(0)             // x defaults to 1
+])
+
+let value = easing.calculate(0.75)
+````
+
 ## Reference
 
 |  Easing   |  Curve   |
 | :---: | :---: |
 |`.linear`|<img src="Demo/Ref/ReferenceImages_64/DemoTests.EasingDemoTests/test_linear@3x.png" width="100"/>|
+|`.piecewiseLinear(0, 1@0.6, 0)`|<img src="Demo/Ref/ReferenceImages_64/DemoTests.EasingDemoTests/test_piecewiseLinear_0__1_0_6__0_@3x.png" width="100"/>|
+|`.piecewiseLinear(spring)`|<img src="Demo/Ref/ReferenceImages_64/DemoTests.EasingDemoTests/test_piecewiseLinear_spring_@3x.png" width="100"/>|
 |`.smoothStep`|<img src="Demo/Ref/ReferenceImages_64/DemoTests.EasingDemoTests/test_smoothStep@3x.png" width="100"/>|
 |`.smootherStep`|<img src="Demo/Ref/ReferenceImages_64/DemoTests.EasingDemoTests/test_smootherStep@3x.png" width="100"/>|
 |`.quadraticEaseIn`|<img src="Demo/Ref/ReferenceImages_64/DemoTests.EasingDemoTests/test_quadraticEaseIn@3x.png" width="100"/>|
