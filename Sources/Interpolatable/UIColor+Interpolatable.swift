@@ -9,6 +9,9 @@ import UIKit
 
 extension UIColor: Interpolatable {
     // TODO: check alternative interpolations https://raphlinus.github.io/color/2021/01/18/oklab-critique.html
+    private static func clamp01(_ value: CGFloat) -> CGFloat {
+        return min(1, max(0, value))
+    }
 
     private func rgbaComponents() -> (CGFloat, CGFloat, CGFloat, CGFloat) {
         var r: CGFloat = 0
@@ -82,10 +85,10 @@ extension UIColor: Interpolatable {
         let (h2, s2, b2, a2) = to.hsbComponents()
 
         return Self(
-            hue: h1.interpolate(to: h2, progress: progress, easing: easing),
-            saturation: s1.interpolate(to: s2, progress: progress, easing: easing),
-            brightness: b1.interpolate(to: b2, progress: progress, easing: easing),
-            alpha: a1.interpolate(to: a2, progress: progress, easing: easing)
+            hue: Self.clamp01(h1.interpolate(to: h2, progress: progress, easing: easing)),
+            saturation: Self.clamp01(s1.interpolate(to: s2, progress: progress, easing: easing)),
+            brightness: Self.clamp01(b1.interpolate(to: b2, progress: progress, easing: easing)),
+            alpha: Self.clamp01(a1.interpolate(to: a2, progress: progress, easing: easing))
         )
     }
 
@@ -95,10 +98,10 @@ extension UIColor: Interpolatable {
         let (r2, g2, b2, a2) = to.rgbaComponents()
 
         return Self(
-            red: r1.interpolate(to: r2, progress: progress, easing: easing),
-            green: g1.interpolate(to: g2, progress: progress, easing: easing),
-            blue: b1.interpolate(to: b2, progress: progress, easing: easing),
-            alpha: a1.interpolate(to: a2, progress: progress, easing: easing)
+            red: Self.clamp01(r1.interpolate(to: r2, progress: progress, easing: easing)),
+            green: Self.clamp01(g1.interpolate(to: g2, progress: progress, easing: easing)),
+            blue: Self.clamp01(b1.interpolate(to: b2, progress: progress, easing: easing)),
+            alpha: Self.clamp01(a1.interpolate(to: a2, progress: progress, easing: easing))
         )
     }
 }

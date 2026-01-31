@@ -8,7 +8,7 @@ import Foundation
 extension CGFloat: Interpolatable {
     /// Interpolates between two scalar values.
     public func interpolate(to: CGFloat, progress: Double, easing: Easing) -> Self {
-        return easing.calculate(d1: self, d2: to, g: progress)
+        return easing.calculate(d1: self, d2: to, g: progress, clamp: false)
     }
 }
 
@@ -25,11 +25,13 @@ extension CGPoint: Interpolatable {
 extension CGRect: Interpolatable {
     /// Interpolates between two rectangles component-wise.
     public func interpolate(to: CGRect, progress: Double, easing: Easing) -> Self {
+        let interpolatedWidth = size.width.interpolate(to: to.size.width, progress: progress, easing: easing)
+        let interpolatedHeight = size.height.interpolate(to: to.size.height, progress: progress, easing: easing)
         return CGRect(
             x: origin.x.interpolate(to: to.origin.x, progress: progress, easing: easing),
             y: origin.y.interpolate(to: to.origin.y, progress: progress, easing: easing),
-            width: size.width.interpolate(to: to.size.width, progress: progress, easing: easing),
-            height: size.height.interpolate(to: to.size.height, progress: progress, easing: easing)
+            width: max(0, interpolatedWidth),
+            height: max(0, interpolatedHeight)
         )
     }
 }
@@ -37,9 +39,11 @@ extension CGRect: Interpolatable {
 extension CGSize: Interpolatable {
     /// Interpolates between two sizes component-wise.
     public func interpolate(to: CGSize, progress: Double, easing: Easing) -> Self {
+        let interpolatedWidth = width.interpolate(to: to.width, progress: progress, easing: easing)
+        let interpolatedHeight = height.interpolate(to: to.height, progress: progress, easing: easing)
         return CGSize(
-            width: width.interpolate(to: to.width, progress: progress, easing: easing),
-            height: height.interpolate(to: to.height, progress: progress, easing: easing)
+            width: max(0, interpolatedWidth),
+            height: max(0, interpolatedHeight)
         )
     }
 }

@@ -76,7 +76,7 @@ extension UIBezierPath: Interpolatable {
         assert(!foundMistmatch, "UIBezierPath.interpolate: path elements type should be the same")
 
         let interpolatedPath = Self(cgPath: CGPath.pathFromPathElements(interpolatedPathElements))
-        interpolatedPath.lineWidth = lineWidth.interpolate(to: to.lineWidth, progress: progress, easing: easing)
+        interpolatedPath.lineWidth = max(0, lineWidth.interpolate(to: to.lineWidth, progress: progress, easing: easing))
 
         interpolatedPath.lineCapStyle = lineCapStyle
         assert(
@@ -90,8 +90,8 @@ extension UIBezierPath: Interpolatable {
             "UIBezierPath.interpolate: lineJoinStyle should be the same"
         )
 
-        interpolatedPath.miterLimit = miterLimit.interpolate(to: to.miterLimit, progress: progress, easing: easing)
-        interpolatedPath.flatness = flatness.interpolate(to: to.flatness, progress: progress, easing: easing)
+        interpolatedPath.miterLimit = max(0, miterLimit.interpolate(to: to.miterLimit, progress: progress, easing: easing))
+        interpolatedPath.flatness = max(0, flatness.interpolate(to: to.flatness, progress: progress, easing: easing))
 
         // TODO: implement line dash pattern interpolation
 
